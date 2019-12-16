@@ -1,4 +1,4 @@
-package framework.FincoObserverable;
+package framework.fincoObserverable;
 import java.util.List;
 
 public abstract class FincoSubject {

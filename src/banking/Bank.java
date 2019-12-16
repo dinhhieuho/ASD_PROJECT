@@ -1,12 +1,18 @@
 package banking;
 
 import framework.Finco;
-import framework.UI.FincoView;
+import framework.ui.FincoView;
 
 public class Bank extends  Finco{
+	
+	public static void main(String[] args) {
+		(new Bank()).run();
+	}
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		setView(new BankView());
 		super.run();
 	}
 	

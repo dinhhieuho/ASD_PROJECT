@@ -1,7 +1,7 @@
 package creditcard;
 
 import framework.Finco;
-import framework.UI.FincoView;
+import framework.ui.FincoView;
 
 public class Ccard extends  Finco{
 	@Override

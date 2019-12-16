@@ -1,4 +1,4 @@
-package framework.Notification;
+package framework.notification;
 
 public class NotificationFactory {
 	public INotification createNotification() {

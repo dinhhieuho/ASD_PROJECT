@@ -1,40 +1,32 @@
-package banking;
+package project.ccard;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 
-import framework.ui.FincoDefaultView;
-
-public class BankView extends FincoDefaultView{
-	private BankController report;
-	
-	
-	javax.swing.JPanel JPanel1 = new javax.swing.JPanel();
-	javax.swing.JButton JButton_PerAC = new javax.swing.JButton();
-	javax.swing.JButton JButton_CompAC = new javax.swing.JButton();
-	javax.swing.JButton JButton_Deposit = new javax.swing.JButton();
-	javax.swing.JButton JButton_Withdraw = new javax.swing.JButton();
-	javax.swing.JButton JButton_Addinterest= new javax.swing.JButton();
-	javax.swing.JButton JButton_Exit = new javax.swing.JButton();
-	
-	String accountnr, clientName,street,city,zip,state,accountType,clientType,amountDeposit;
+/***
+ * A basic JFC based application.
+ ***/
+public class CardFrm extends javax.swing.JFrame
+{
+    /****
+     * init variables in the object
+     ****/
+    String clientName,street,city, zip, state,accountType,amountDeposit,expdate, ccnumber;
     boolean newaccount;
     private DefaultTableModel model;
     private JTable JTable1;
     private JScrollPane JScrollPane1;
-    BankView myframe;
+    CardFrm thisframe;
     private Object rowdata[];
-	
-	public BankView(){
-		initialize();
-	}
-	
-	private void initialize() {
-		setTitle("Bank Application");
+    
+	public CardFrm()
+	{
+		thisframe=this;
+		
+		setTitle("Credit-card processing Application");
 		setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0,0));
 		setSize(575,310);
@@ -50,13 +42,12 @@ public class BankView extends FincoDefaultView{
         JScrollPane1 = new JScrollPane();
         model = new DefaultTableModel();
         JTable1 = new JTable(model);
-        model.addColumn("AccountNr");
         model.addColumn("Name");
-        model.addColumn("City");
-        model.addColumn("P/C");
-        model.addColumn("Ch/S");
-        model.addColumn("Amount");
-        rowdata = new Object[8];
+        model.addColumn("CC number");
+        model.addColumn("Exp date");
+        model.addColumn("Type");
+        model.addColumn("Balance");
+        rowdata = new Object[7];
         newaccount=false;
         
         
@@ -66,42 +57,74 @@ public class BankView extends FincoDefaultView{
         JTable1.setBounds(0, 0, 420, 0);
 //        rowdata = new Object[8];
 		
-		JButton_PerAC.setText("Add personal account");
-		JPanel1.add(JButton_PerAC);
-		JButton_PerAC.setBounds(24,20,192,33);
-		JButton_CompAC.setText("Add company account");
-		JButton_CompAC.setActionCommand("jbutton");
-		JPanel1.add(JButton_CompAC);
-		JButton_CompAC.setBounds(240,20,192,33);
+		JButton_NewCCAccount.setText("Add Credit-card account");
+		JPanel1.add(JButton_NewCCAccount);
+		JButton_NewCCAccount.setBounds(24,20,192,33);
+		JButton_GenBill.setText("Generate Monthly bills");
+		JButton_GenBill.setActionCommand("jbutton");
+		JPanel1.add(JButton_GenBill);
+		JButton_GenBill.setBounds(240,20,192,33);
 		JButton_Deposit.setText("Deposit");
 		JPanel1.add(JButton_Deposit);
 		JButton_Deposit.setBounds(468,104,96,33);
-		JButton_Withdraw.setText("Withdraw");
+		JButton_Withdraw.setText("Charge");
 		JPanel1.add(JButton_Withdraw);
-		JButton_Addinterest.setBounds(448,20,106,33);
-		JButton_Addinterest.setText("Add interest");
-		JPanel1.add(JButton_Addinterest);
 		JButton_Withdraw.setBounds(468,164,96,33);
 		JButton_Exit.setText("Exit");
 		JPanel1.add(JButton_Exit);
 		JButton_Exit.setBounds(468,248,96,31);
-		// lineBorder1.setRoundedCorners(true);
-		// lineBorder1.setLineColor(java.awt.Color.green);
-		//$$ lineBorder1.move(24,312);
 
-		JButton_PerAC.setActionCommand("jbutton");
+
+		JButton_GenBill.setActionCommand("jbutton");
 
 		SymWindow aSymWindow = new SymWindow();
 		this.addWindowListener(aSymWindow);
 		SymAction lSymAction = new SymAction();
 		JButton_Exit.addActionListener(lSymAction);
-		JButton_PerAC.addActionListener(lSymAction);
-		JButton_CompAC.addActionListener(lSymAction);
+		JButton_NewCCAccount.addActionListener(lSymAction);
+		JButton_GenBill.addActionListener(lSymAction);
 		JButton_Deposit.addActionListener(lSymAction);
 		JButton_Withdraw.addActionListener(lSymAction);
-		JButton_Addinterest.addActionListener(lSymAction);
+		
 	}
+
 	
+	/*****************************************************
+	 * The entry point for this application.
+	 * Sets the Look and Feel to the System Look and Feel.
+	 * Creates a new JFrame1 and makes it visible.
+	 *****************************************************/
+	static public void main(String args[])
+	{
+		try {
+		    // Add the following code if you want the Look and Feel
+		    // to be set to the Look and Feel of the native system.
+		    
+		    try {
+		        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		    } 
+		    catch (Exception e) { 
+		    }
+		    
+			//Create a new instance of our application's frame, and make it visible.
+			(new CardFrm()).setVisible(true);
+		} 
+		catch (Throwable t) {
+			t.printStackTrace();
+			//Ensure the application exits with an error condition.
+			System.exit(1);
+		}
+	}
+
+
+	javax.swing.JPanel JPanel1 = new javax.swing.JPanel();
+	javax.swing.JButton JButton_NewCCAccount = new javax.swing.JButton();
+	javax.swing.JButton JButton_GenBill = new javax.swing.JButton();
+	javax.swing.JButton JButton_Deposit = new javax.swing.JButton();
+	javax.swing.JButton JButton_Withdraw = new javax.swing.JButton();
+	javax.swing.JButton JButton_Exit = new javax.swing.JButton();
+
+
 	void exitApplication()
 	{
 		try {
@@ -117,7 +140,7 @@ public class BankView extends FincoDefaultView{
 		public void windowClosing(java.awt.event.WindowEvent event)
 		{
 			Object object = event.getSource();
-			if (object == BankView.this)
+			if (object == CardFrm.this)
 				BankFrm_windowClosing(event);
 		}
 	}
@@ -143,16 +166,14 @@ public class BankView extends FincoDefaultView{
 			Object object = event.getSource();
 			if (object == JButton_Exit)
 				JButtonExit_actionPerformed(event);
-			else if (object == JButton_PerAC)
-				JButtonPerAC_actionPerformed(event);
-			else if (object == JButton_CompAC)
-				JButtonCompAC_actionPerformed(event);
+			else if (object == JButton_NewCCAccount)
+				JButtonNewCCAC_actionPerformed(event);
+			else if (object == JButton_GenBill)
+				JButtonGenerateBill_actionPerformed(event);
 			else if (object == JButton_Deposit)
 				JButtonDeposit_actionPerformed(event);
 			else if (object == JButton_Withdraw)
 				JButtonWithdraw_actionPerformed(event);
-			else if (object == JButton_Addinterest)
-				JButtonAddinterest_actionPerformed(event);
 			
 		}
 	}
@@ -164,7 +185,7 @@ public class BankView extends FincoDefaultView{
 		System.exit(0);
 	}
 
-	void JButtonPerAC_actionPerformed(java.awt.event.ActionEvent event)
+	void JButtonNewCCAC_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		/*
 		 JDialog_AddPAcc type object is for adding personal information
@@ -172,52 +193,32 @@ public class BankView extends FincoDefaultView{
 		 set the boundaries and show it 
 		*/
 		
-		//JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe);
-		/*pac.setBounds(450, 20, 300, 330);
-		pac.show();
+		JDialog_AddCCAccount ccac = new JDialog_AddCCAccount(thisframe);
+		ccac.setBounds(450, 20, 300, 380);
+		ccac.show();
 
 		if (newaccount){
             // add row to table
-            rowdata[0] = accountnr;
-            rowdata[1] = clientName;
-            rowdata[2] = city;
-            rowdata[3] = "P";
-            rowdata[4] = accountType;
-            rowdata[5] = "0";
+            rowdata[0] = clientName;
+            rowdata[1] = ccnumber;
+            rowdata[2] = expdate;
+            rowdata[3] = accountType;
+            rowdata[4] = "0";
             model.addRow(rowdata);
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
         }
-*/
+
        
         
     }
 
-	void JButtonCompAC_actionPerformed(java.awt.event.ActionEvent event)
+	void JButtonGenerateBill_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		/*
-		 construct a JDialog_AddCompAcc type object 
-		 set the boundaries and 
-		 show it 
-		*/
-		/*
-		JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
-		pac.setBounds(450, 20, 300, 330);
-		pac.show();
-		
-		if (newaccount){
-            // add row to table
-            rowdata[0] = accountnr;
-            rowdata[1] = clientName;
-            rowdata[2] = city;
-            rowdata[3] = "C";
-            rowdata[4] = accountType;
-            rowdata[5] = "0";
-            model.addRow(rowdata);
-            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
-            newaccount=false;
-        }
-*/
+		JDialogGenBill billFrm = new JDialogGenBill();
+		billFrm.setBounds(450, 20, 400, 350);
+		billFrm.show();
+	    
 	}
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event)
@@ -225,19 +226,19 @@ public class BankView extends FincoDefaultView{
 	    // get selected name
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
         if (selection >=0){
-            String accnr = (String)model.getValueAt(selection, 0);
-    	    /*
+            String name = (String)model.getValueAt(selection, 0);
+    	    
 		    //Show the dialog for adding deposit amount for the current mane
-		    JDialog_Deposit dep = new JDialog_Deposit(myframe,accnr);
+		    JDialog_Deposit dep = new JDialog_Deposit(thisframe,name);
 		    dep.setBounds(430, 15, 275, 140);
 		    dep.show();
     		
 		    // compute new amount
             long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 5);
+            String samount = (String)model.getValueAt(selection, 4);
             long currentamount = Long.parseLong(samount);
 		    long newamount=currentamount+deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 5);*/
+		    model.setValueAt(String.valueOf(newamount),selection, 4);
 		}
 		
 		
@@ -248,30 +249,25 @@ public class BankView extends FincoDefaultView{
 	    // get selected name
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
         if (selection >=0){
-            String accnr = (String)model.getValueAt(selection, 0);
+            String name = (String)model.getValueAt(selection, 0);
 
 		    //Show the dialog for adding withdraw amount for the current mane
-		    /*JDialog_Withdraw wd = new JDialog_Withdraw(myframe,accnr);
+		    JDialog_Withdraw wd = new JDialog_Withdraw(thisframe,name);
 		    wd.setBounds(430, 15, 275, 140);
 		    wd.show();
-    		*/
+    		
 		    // compute new amount
             long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 5);
+            String samount = (String)model.getValueAt(selection, 4);
             long currentamount = Long.parseLong(samount);
 		    long newamount=currentamount-deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 5);
+		    model.setValueAt(String.valueOf(newamount),selection, 4);
 		    if (newamount <0){
-		       JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
+		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
 		    }
 		}
 		
 		
 	}
 	
-	void JButtonAddinterest_actionPerformed(java.awt.event.ActionEvent event)
-	{
-		  JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
-	    
-	}
 }

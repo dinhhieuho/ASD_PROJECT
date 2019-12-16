@@ -1,6 +1,6 @@
 package creditcard;
 
-import framework.UI.FincoDefaultView;
+import framework.ui.FincoDefaultView;
 
 public class CcardView extends FincoDefaultView {
 

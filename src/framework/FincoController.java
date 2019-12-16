@@ -1,8 +1,8 @@
 package framework;
 
-import framework.FincoObserverable.FincoSubject;
-import framework.Notification.NotificationFactory;
-import framework.Notification.NotificationManager;
+import framework.fincoObserverable.FincoSubject;
+import framework.notification.NotificationFactory;
+import framework.notification.NotificationManager;
 
 public abstract class FincoController {
 	private NotificationFactory notificationFactory;

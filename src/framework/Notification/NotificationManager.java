@@ -1,8 +1,8 @@
-package framework.Notification;
+package framework.notification;
 import java.util.ArrayList;
 import java.util.List;
 
-import framework.Notification.INotificationManager;
+import framework.notification.INotificationManager;
 
 public class NotificationManager implements INotificationManager {
 	

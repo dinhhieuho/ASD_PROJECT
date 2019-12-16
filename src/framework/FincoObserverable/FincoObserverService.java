@@ -1,4 +1,4 @@
-package framework.FincoObserverable;
+package framework.fincoObserverable;
 /**
  * 
  */
