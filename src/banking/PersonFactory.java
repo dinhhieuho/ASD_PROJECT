@@ -1,6 +1,6 @@
 package banking;
 
-import framework.FincoAccount;
+import framework.fincoAccount.FincoAccount;
 
 public class PersonFactory extends BankFactory{
 

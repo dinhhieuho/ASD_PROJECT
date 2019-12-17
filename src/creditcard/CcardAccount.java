@@ -3,8 +3,8 @@ package creditcard;
 import java.time.LocalDate;
 import java.util.List;
 
-import framework.Account;
-import framework.Entry;
+import framework.fincoAccount.Account;
+import framework.fincoEntry.Entry;
 
 public  abstract class CcardAccount extends  Account{
 	private String cc_number;
