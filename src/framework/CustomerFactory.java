@@ -5,7 +5,7 @@ public class CustomerFactory implements FincoFactory {
 
 	public Customer createCustomer(String name, String street, String city, String state, int zip, String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return new Customer(name, street, city, state, zip, email);
 	}
 
 	public Entry createEntry(double amount, LocalDate date) {

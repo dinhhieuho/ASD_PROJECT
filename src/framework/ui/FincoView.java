@@ -2,7 +2,7 @@ package framework.ui;
 
 import javax.swing.JFrame;
 
-import framework.FincoController;
+import framework.controller.FincoController;
 
 public abstract class FincoView extends JFrame {
 	private FincoController controller;
