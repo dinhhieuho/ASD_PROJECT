@@ -1,4 +1,4 @@
-package framework;
+package framework.controller;
 
 import java.util.Map;
 
@@ -11,8 +11,8 @@ public class DebitController extends FincoController {
 		//arg.put("number",String.valueOf(accNumber));
 		//arg.put("amount",String.valueOf(amount));
 		
-		FincoCustomer cus = findCustomerByName(arg.get("name"));
-		cus.debit(arg.get("accNumber"), arg.get("amount"));
+		//FincoCustomer cus = findCustomerByName(arg.get("name"));
+		//cus.debit(arg.get("accNumber"), arg.get("amount"));
 	}
 
 }

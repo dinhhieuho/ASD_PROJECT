@@ -1,6 +1,9 @@
-package framework;
+package framework.controller;
 
 import java.util.Map;
+
+import framework.CustomerFactory;
+import framework.FincoCustomer;
 
 public class CustomerController extends FincoController {
 	
@@ -12,7 +15,7 @@ public class CustomerController extends FincoController {
 		FincoCustomer cus = getFincoFactory().createCustomer(arg.get("name"), arg.get("street"), 
 				arg.get("city"), arg.get("state"), Integer.parseInt(arg.get("zip")), arg.get("email"));
 		
-		cus.addAccount()
+		//cus.addAccount()
 		
 	}
 

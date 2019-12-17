@@ -1,6 +1,6 @@
 package creditcard;
 
-import framework.FincoController;
+import framework.controller.FincoController;
 
 public  abstract class CcardController extends FincoController{
 
