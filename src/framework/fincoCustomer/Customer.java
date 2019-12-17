@@ -37,14 +37,14 @@ public class Customer implements FincoCustomer {
 	}
 
 	@Override
-	public void sendEmailToCustomer(String message, String transactionType, String accountNumber) {
+	public void sendEmail(String message) {
 		System.out
 				.println("Email Message: " + message + "\n" + "Email address: " + email + "\n Entry Date: " + accounts);
 
 	}
 
 	@Override
-	public void debit(String accountNumber, double amount) {
+	public void debit(String accountNumber, double amount) throws AccountNotFoundException,BalanceInsufficientException {
 		Account account = findAccount(accountNumber);
 		if (account == null) {
 			throw new AccountNotFoundException("Account Not Found");
@@ -58,21 +58,48 @@ public class Customer implements FincoCustomer {
 		}
 
 	}
-
+	
+	
+	
 	@Override
-	public void credit(String accountNumber, double amount) {
+	public void credit(String accountNumber, double amount) throws AccountNotFoundException {
 		Account account = findAccount(accountNumber);
-		if (account == null) {
+		if (account != null) {
 			double balance = account.getBalance() + amount;
 			account.setBalance(balance);
 			account.addEntry(new Entry(balance));
+			printCustomerLog("Account name: "+name+" "+account);
+		}else {
+			throw new AccountNotFoundException("Account Not Found");
 		}
-		throw new AccountNotFoundException("Account Not Found");
 
 	}
 
-	private Account findAccount(String accountNumber) {
+	public Account findAccount(String accountNumber) {
 		return accounts.get(accountNumber);
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public HashMap<String, Account> getAccounts() {
+		return accounts;
+	}
+	
+	@Override
+	public String toString() {
+		return "{Name: "+name
+				+ ",Street: "+street
+				+ ",City: "+city
+				+ ",State: "+state
+				+ ",Email: "+email
+				+ ",Zip: "+zip
+				+ "}";
+	}
+	
+	private void printCustomerLog(String message) {
+		System.out.println("Finco [INFO]: "+message);
 	}
 
 }

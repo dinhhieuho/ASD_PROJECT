@@ -1,6 +1,6 @@
 package framework.exceptions;
 
-public class AccountNotFoundException extends RuntimeException{
+public class AccountNotFoundException extends Exception{
 
 	/**
 	 * 

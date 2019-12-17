@@ -2,9 +2,10 @@ package banking;
 
 public class CheckingAccount extends BankAccount {
 	
-	public CheckingAccount(int accNumber) {
+	private double balance ;
+	
+	public CheckingAccount(String accNumber) {
 		super(accNumber);
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -12,8 +13,15 @@ public class CheckingAccount extends BankAccount {
 
 	@Override
 	public void addInterest() {
-		// TODO Auto-generated method stub
-		
+		balance = balance + computeInterest();
+	}
+	
+	private double computeInterest() {
+		return balance * interestRate;
+	}
+	
+	public double getbalance() {
+		return balance;
 	}
 
 }

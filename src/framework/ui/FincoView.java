@@ -1,10 +1,9 @@
 package framework.ui;
 
 import javax.swing.JFrame;
-
-import framework.controller.FincoController;
+import javax.swing.table.DefaultTableModel;
 
 public abstract class FincoView extends JFrame {
-	private FincoController controller;
 	public abstract void run();
+	public abstract void setTableModel(DefaultTableModel model);
 }

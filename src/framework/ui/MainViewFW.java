@@ -1,6 +1,7 @@
 package framework.ui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +12,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import banking.BankView;
+import framework.controller.ControllerContext;
+import framework.fincoCustomer.Customer;
 
 
 public class MainViewFW extends FincoDefaultView {
 	List<JButton> topButtons = new ArrayList();
 	List<JButton> rightButtons = new ArrayList();
+	
+	private MainViewFW view = this;
 	
 	JButton JButton_Exit = new JButton();
 	
@@ -39,39 +43,26 @@ public class MainViewFW extends FincoDefaultView {
     
     private void buildDefaultView() {
     	
-    	title = "Bank Application Default View";
+    	title = "Finco Default View";
     	
-    	DefaultTableModel model = new DefaultTableModel();
-    	model.addColumn("AccountNr");
-        model.addColumn("Name");
-        model.addColumn("City");
-        model.addColumn("P/C");
-        model.addColumn("Ch/S");
-        model.addColumn("Amount");
+    	ControllerContext context = new ControllerContext(this);
+        context.populateAccounts();
         
-        setTableModel(model);
+        JButton JButton_Customer = new JButton();
+        JButton_Customer.setText("Add Customer");
         
-        
-        JButton JButton_PerAC = new JButton();
-        JButton_PerAC.setText("Add personal account");
-        
-    	JButton JButton_CompAC = new JButton();
-    	JButton_CompAC.setText("Add company account");
+    
     	
-    	JButton JButton_Addinterest= new JButton();
-    	JButton_Addinterest.setText("Add interest");
+    	JButton JButton_Credit= new JButton();
+    	JButton_Credit.setText("Credit Account");
     	
-    	addTopButton(JButton_PerAC);
-    	addTopButton(JButton_CompAC);
-    	addTopButton(JButton_Addinterest);
+    	addTopButton(JButton_Customer);
+    	addTopButton(JButton_Credit);
         
-    	JButton JButton_Deposit = new JButton();
-    	JButton_Deposit.setText("Deposit");
-    	JButton JButton_Withdraw = new JButton();
-    	JButton_Withdraw.setText("Withdraw");
+    	JButton JButton_Debit = new JButton();
+    	JButton_Debit.setText("Debit Account");
     	
-    	addRightButton(JButton_Deposit);
-    	addRightButton(JButton_Withdraw);
+    	addRightButton(JButton_Debit);
     	
     	buildGUI();
     	
@@ -83,7 +74,41 @@ public class MainViewFW extends FincoDefaultView {
 		JButton_Withdraw.addActionListener(lSymAction);
 		JButton_Addinterest.addActionListener(lSymAction);
 		*/
+    	
+    	JButton_Customer.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CustomerDialogBox pac = new CustomerDialogBox(view);
+				pac.setBounds(450, 20, 300, 330);
+				pac.show();
+
+			}
+		});
+    	
+    	JButton_Debit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DebitDialog debitDialog = new DebitDialog(view);
+				debitDialog.setBounds(450, 20, 300, 330);
+				debitDialog.show();
+			}
+		});
+    	
+    	JButton_Credit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CreditDialog creditDialog = new CreditDialog(view);
+				creditDialog.setBounds(450, 20, 300, 330);
+				creditDialog.show();
+			}
+		});
+    	
+    	
     }
+    
+    
 	
 	public void addTopButton(JButton btn) {
 		topButtons.add(btn);
@@ -93,8 +118,11 @@ public class MainViewFW extends FincoDefaultView {
 		rightButtons.add(btn);
 	}
 	
+	@Override
 	public void setTableModel(DefaultTableModel model) {
+		System.out.println(model.getRowCount());
 		JTable1 = new JTable(model);
+
 	}
 	
 	public void buildGUI() {
@@ -172,4 +200,6 @@ public class MainViewFW extends FincoDefaultView {
 		} catch (Exception e) {
 		}
 	}
+	
+	
 }

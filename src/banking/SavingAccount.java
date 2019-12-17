@@ -1,18 +1,24 @@
 package banking;
 
 public class SavingAccount extends BankAccount{
+	private double balance;
 	
-	public SavingAccount(int accNumber) {
+	public SavingAccount(String accNumber) {
 		super(accNumber);
-		// TODO Auto-generated constructor stub
 	}
 
 	private final double interestRate = 0.0325;
 
 	@Override
 	public void addInterest() {
-		// TODO Auto-generated method stub
-		
+		balance = balance + computeInterest();
+	}
+	
+	private double computeInterest() {
+		return balance * interestRate;
+	}
+	public double getbalance() {
+		return balance;
 	}
 
 }

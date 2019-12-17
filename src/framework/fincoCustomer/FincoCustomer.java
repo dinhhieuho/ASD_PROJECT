@@ -32,7 +32,7 @@ public interface FincoCustomer {
 	/**
 	 * @param message the {@code message to be sent}
 	 */
-	public void sendEmailToCustomer(String message,String transactionType,String accountNumber);
+	public void sendEmail(String message);
 	
 	
 	/**
@@ -48,7 +48,8 @@ public interface FincoCustomer {
 	 * <p>Method credits account</p>
 	 * @param accountNumber
 	 * @param amount
+	 * @throws AccountNotFoundException 
 	 */
-	public void credit(String accountNumber,double amount);
+	public void credit(String accountNumber,double amount) throws AccountNotFoundException;
 	
 }

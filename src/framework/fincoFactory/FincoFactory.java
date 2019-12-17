@@ -1,4 +1,5 @@
 package framework.fincoFactory;
+import framework.exceptions.AccountExistException;
 import framework.fincoAccount.Account;
 import framework.fincoCustomer.Customer;
 import framework.fincoEntry.Entry;
@@ -20,9 +21,11 @@ public interface FincoFactory {
 	 * @param state
 	 * @param zip
 	 * @param email
+	 * @exception AccountExistException
 	 * @return
 	 */
-	public Customer createCustomer(String name, String street, String city, String state, int zip, String email);
+	public Customer createCustomer(String name, String street, String city, 
+			String state, int zip, String email,String accountNumber);
 	
 	/**
 	 * <p>New Entry for account</p>
@@ -38,5 +41,8 @@ public interface FincoFactory {
 	 * create new account
 	 * @return
 	 */
-	public Account createAccount();
+	public Account createAccount(String accountNumber);
+	
+	
+	
 }

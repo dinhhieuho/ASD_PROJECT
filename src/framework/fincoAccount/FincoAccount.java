@@ -14,5 +14,8 @@ public interface FincoAccount {
 	 * @param entry
 	 */
 	public void addEntry(Entry entry);
+	
+	
+	public void addInterest();
 
 }
