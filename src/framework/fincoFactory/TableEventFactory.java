@@ -19,7 +19,7 @@ public class TableEventFactory {
 	private static FincoSubject<FincoObserver> subject = null;
 	private static FincoTableObserver observer = null;
 	
-	public static FincoSubject<FincoObserver> getInstance(FincoView view) {
+	private static FincoSubject<FincoObserver> getInstance(FincoView view) {
 		if(subject == null) {
 			subject = new FincoSubjectService<FincoObserver>(view);	
 			observer = new FincoTableObserver(subject);
