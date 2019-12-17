@@ -75,8 +75,6 @@ public class MainViewFW extends FincoDefaultView {
     	
     	buildGUI();
     	
-    	SymWindow aSymWindow = new SymWindow();
-		this.addWindowListener(aSymWindow);
 		/*SymAction lSymAction = new SymAction();
 		JButton_Exit.addActionListener(lSymAction);
 		JButton_PerAC.addActionListener(lSymAction);
@@ -138,6 +136,9 @@ public class MainViewFW extends FincoDefaultView {
         JButton_Exit.setText("Exit");
 		JPanel1.add(JButton_Exit);
 		JButton_Exit.setBounds(468,248,96,31);
+		
+		SymWindow aSymWindow = new SymWindow();
+		this.addWindowListener(aSymWindow);
 		
 	}
 	
