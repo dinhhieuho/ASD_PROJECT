@@ -14,4 +14,8 @@ public class Finco {
 	public void setView(FincoView view) {
 		this.view = view;
 	}
+	
+	public FincoView getView() {
+		return view;
+	}
 }

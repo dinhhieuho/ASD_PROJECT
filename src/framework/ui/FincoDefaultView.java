@@ -38,11 +38,13 @@ public class FincoDefaultView extends FincoView {
     public FincoDefaultView(String title, ActionListener AL) {
     	this.title = title;
     	this.AL = AL;
+    	setTitle("Finco Default View");
     }
     
+    
+    
     private void buildDefaultView() {
-    	
-    	title = "Finco Default View";
+ 	
     	
     	ControllerContext context = new ControllerContext(this);
         context.populateAccounts();
@@ -215,9 +217,15 @@ public class FincoDefaultView extends FincoView {
 	public void run() {
 		this.setVisible(true);
 	}
+
+	@Override
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	
 	
 
+	
 	
 
 	
