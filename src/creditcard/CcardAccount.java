@@ -7,6 +7,11 @@ import framework.fincoAccount.Account;
 import framework.fincoEntry.Entry;
 
 public  abstract class CcardAccount extends  Account{
+	public CcardAccount(int accNumber) {
+		super(accNumber);
+		// TODO Auto-generated constructor stub
+	}
+
 	private String cc_number;
 	private LocalDate exp_date;
 	private double lastMonthBalance;
