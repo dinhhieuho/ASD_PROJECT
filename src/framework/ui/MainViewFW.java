@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import banking.BankView;
 
+
 public class MainViewFW extends FincoDefaultView {
 	List<JButton> topButtons = new ArrayList();
 	List<JButton> rightButtons = new ArrayList();
@@ -73,6 +74,17 @@ public class MainViewFW extends FincoDefaultView {
     	addRightButton(JButton_Withdraw);
     	
     	buildGUI();
+    	
+    	SymWindow aSymWindow = new SymWindow();
+		this.addWindowListener(aSymWindow);
+		/*SymAction lSymAction = new SymAction();
+		JButton_Exit.addActionListener(lSymAction);
+		JButton_PerAC.addActionListener(lSymAction);
+		JButton_CompAC.addActionListener(lSymAction);
+		JButton_Deposit.addActionListener(lSymAction);
+		JButton_Withdraw.addActionListener(lSymAction);
+		JButton_Addinterest.addActionListener(lSymAction);
+		*/
     }
 	
 	public void addTopButton(JButton btn) {
