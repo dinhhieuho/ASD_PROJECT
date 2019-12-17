@@ -1,8 +1,10 @@
-package framework.doa;
+package framework.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import framework.fincoCustomer.Customer;
+import framework.fincoCustomer.FincoCustomer;
 
 
 /**
@@ -26,4 +28,12 @@ public interface FincoDao {
 	 * @param customer
 	 */
 	public void delete(Customer customer);
+	
+	
+	/**
+	 * <p>Searches in the db customer with {@code name}
+	 * @param name
+	 * @return
+	 */
+	public Optional<Customer> findCustomerByName(String name);
 }

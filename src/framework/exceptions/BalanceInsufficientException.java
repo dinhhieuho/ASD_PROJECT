@@ -7,7 +7,7 @@ package framework.exceptions;
  * @author SARFO PHILIP
  *
  */
-public class BalanceInsufficientException extends RuntimeException{
+public class BalanceInsufficientException extends Exception{
 	
 	/**
 	 * 

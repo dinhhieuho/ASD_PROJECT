@@ -1,11 +1,12 @@
-package framework.doa;
+package framework.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import framework.db.FincoDb;
 import framework.fincoCustomer.Customer;
 
-public class FincoDoaImpl implements FincoDao {
+public class FincoDaoImpl implements FincoDao {
 
 	private FincoDb<Customer> dbInstance = FincoDb.getInstance();
 
@@ -22,6 +23,11 @@ public class FincoDoaImpl implements FincoDao {
 	@Override
 	public void delete(Customer customer) {
 		dbInstance.remove(customer);
+	}
+
+	@Override
+	public Optional<Customer> findCustomerByName(String name) {
+		return dbInstance.stream().filter(c->c.getName().equals(name)).findAny();
 	}
 
 }

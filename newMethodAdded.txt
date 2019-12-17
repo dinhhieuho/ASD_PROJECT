@@ -1,0 +1,3 @@
+public abstract class FincoController:
+setFincoFactory(FincoFactory fincoFactory)
+FincoFactory getFincoFactory()

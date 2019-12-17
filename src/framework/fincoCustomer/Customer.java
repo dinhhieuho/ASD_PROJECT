@@ -44,7 +44,7 @@ public class Customer implements FincoCustomer {
 	}
 
 	@Override
-	public void debit(String accountNumber, double amount) {
+	public void debit(String accountNumber, double amount) throws AccountNotFoundException,BalanceInsufficientException {
 		Account account = findAccount(accountNumber);
 		if (account == null) {
 			throw new AccountNotFoundException("Account Not Found");
@@ -60,7 +60,7 @@ public class Customer implements FincoCustomer {
 	}
 
 	@Override
-	public void credit(String accountNumber, double amount) {
+	public void credit(String accountNumber, double amount) throws AccountNotFoundException {
 		Account account = findAccount(accountNumber);
 		if (account == null) {
 			double balance = account.getBalance() + amount;
@@ -73,6 +73,10 @@ public class Customer implements FincoCustomer {
 
 	private Account findAccount(String accountNumber) {
 		return accounts.get(accountNumber);
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 }
