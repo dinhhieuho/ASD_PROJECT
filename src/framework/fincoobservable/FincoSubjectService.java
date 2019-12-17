@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import framework.fincoCustomer.Customer;
+import framework.ui.FincoView;
 
 public class FincoSubjectService<T  extends FincoObserver> implements FincoSubject<T>{
 	
 	
 	private List<T> observers = new ArrayList<>();
 	
-	private Customer state;
+	private FincoView state;
+	
+	public FincoSubjectService(FincoView state) {
+		this.state = state;
+	}
 
 	@Override
 	public void subscribe(T observer) {
@@ -22,10 +27,13 @@ public class FincoSubjectService<T  extends FincoObserver> implements FincoSubje
 		for(T t : observers)
 			 t.update();	
 	}
-		
-	public Customer getState() {
+	
+	@Override
+	public FincoView getState() {
 		return state;
 	}
+	
+	
 	
 
 

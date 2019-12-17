@@ -11,6 +11,7 @@ public class ControllerContext {
 	FincoController controller = new CustomerController();
 	FincoController debController = new DebitController();
 	FincoController credController = new CreditController();
+	FincoController accountListController = new AccountListController();
 	
 	private FincoView context;
 	
@@ -47,21 +48,24 @@ public class ControllerContext {
 	public void debitAccount(String accNumber, double amount) {
 		Map<String, String> arg = new HashMap<String, String>();
 		
-	
 		arg.put("accNumber",String.valueOf(accNumber));
 		arg.put("amount",String.valueOf(amount));
 		
 		debController.actionHandler(arg,context);
 	}
 	
-	public void creditAccount(String customerName, int accNumber, double amount) {
+	public void creditAccount(String accNumber, double amount) {
 		
 		Map<String, String> arg = new HashMap<String, String>();
 		
-		arg.put("name",customerName);
-		arg.put("number",String.valueOf(accNumber));
+		//arg.put("name",customerName);
+		arg.put("accNumber",accNumber);
 		arg.put("amount",String.valueOf(amount));
 		
 		credController.actionHandler(arg,context);
+	}
+	
+	public void populateAccounts() {
+		accountListController.actionHandler(null, context);
 	}
 }

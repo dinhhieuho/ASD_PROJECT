@@ -64,13 +64,14 @@ public class Customer implements FincoCustomer {
 	@Override
 	public void credit(String accountNumber, double amount) throws AccountNotFoundException {
 		Account account = findAccount(accountNumber);
-		if (account == null) {
+		if (account != null) {
 			double balance = account.getBalance() + amount;
 			account.setBalance(balance);
 			account.addEntry(new Entry(balance));
 			printCustomerLog("Account name: "+name+" "+account);
+		}else {
+			throw new AccountNotFoundException("Account Not Found");
 		}
-		throw new AccountNotFoundException("Account Not Found");
 
 	}
 

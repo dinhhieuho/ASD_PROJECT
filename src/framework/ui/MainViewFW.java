@@ -12,11 +12,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import framework.controller.ControllerContext;
+import framework.fincoCustomer.Customer;
+
 
 public class MainViewFW extends FincoDefaultView {
 	List<JButton> topButtons = new ArrayList();
 	List<JButton> rightButtons = new ArrayList();
+	
 	private MainViewFW view = this;
+	
 	JButton JButton_Exit = new JButton();
 	
 	JPanel JPanel1 = new JPanel();
@@ -40,16 +45,8 @@ public class MainViewFW extends FincoDefaultView {
     	
     	title = "Finco Default View";
     	
-    	DefaultTableModel model = new DefaultTableModel();
-    	model.addColumn("AccountNr");
-        model.addColumn("Name");
-        model.addColumn("City");
-        model.addColumn("P/C");
-        model.addColumn("Ch/S");
-        model.addColumn("Amount");
-        
-        setTableModel(model);
-        
+    	ControllerContext context = new ControllerContext(this);
+        context.populateAccounts();
         
         JButton JButton_Customer = new JButton();
         JButton_Customer.setText("Add Customer");
@@ -62,10 +59,10 @@ public class MainViewFW extends FincoDefaultView {
     	addTopButton(JButton_Customer);
     	addTopButton(JButton_Credit);
         
-    	JButton JButton_Deposit = new JButton();
-    	JButton_Deposit.setText("Debit Account");
+    	JButton JButton_Debit = new JButton();
+    	JButton_Debit.setText("Debit Account");
     	
-    	addRightButton(JButton_Deposit);
+    	addRightButton(JButton_Debit);
     	
     	buildGUI();
     	
@@ -78,8 +75,7 @@ public class MainViewFW extends FincoDefaultView {
 		JButton_Addinterest.addActionListener(lSymAction);
 		*/
     	
-    	JButton_Customer.addActionListener(new ActionListener() {
-			
+    	JButton_Customer.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CustomerDialogBox pac = new CustomerDialogBox(view);
@@ -89,13 +85,23 @@ public class MainViewFW extends FincoDefaultView {
 			}
 		});
     	
-    	JButton_Credit.addActionListener(new ActionListener() {
+    	JButton_Debit.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DebitDialog debitDialog = new DebitDialog(view);
 				debitDialog.setBounds(450, 20, 300, 330);
 				debitDialog.show();
+			}
+		});
+    	
+    	JButton_Credit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CreditDialog creditDialog = new CreditDialog(view);
+				creditDialog.setBounds(450, 20, 300, 330);
+				creditDialog.show();
 			}
 		});
     	
@@ -112,8 +118,11 @@ public class MainViewFW extends FincoDefaultView {
 		rightButtons.add(btn);
 	}
 	
+	@Override
 	public void setTableModel(DefaultTableModel model) {
+		System.out.println(model.getRowCount());
 		JTable1 = new JTable(model);
+
 	}
 	
 	public void buildGUI() {
