@@ -32,7 +32,7 @@ public interface FincoCustomer {
 	/**
 	 * @param message the {@code message to be sent}
 	 */
-	public void sendEmailToCustomer(String message,String transactionType,String accountNumber);
+	public void sendEmail(String message);
 	
 	
 	/**

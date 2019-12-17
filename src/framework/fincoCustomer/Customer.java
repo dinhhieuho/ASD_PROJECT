@@ -37,7 +37,7 @@ public class Customer implements FincoCustomer {
 	}
 
 	@Override
-	public void sendEmailToCustomer(String message, String transactionType, String accountNumber) {
+	public void sendEmail(String message) {
 		System.out
 				.println("Email Message: " + message + "\n" + "Email address: " + email + "\n Entry Date: " + accounts);
 
