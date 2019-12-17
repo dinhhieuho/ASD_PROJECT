@@ -7,13 +7,13 @@ public class PersonFactory extends BankFactory{
 	@Override
 	public FincoAccount createCheckingAccount() {
 		// TODO Auto-generated method stub
-		return new CheckingAccount();
+		return new CheckingAccount(0);
 	}
 
 	@Override
 	public FincoAccount createSavingAccount() {
 		// TODO Auto-generated method stub
-		return new SavingAccount();
+		return new SavingAccount(0);
 	}
 
 }

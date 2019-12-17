@@ -26,15 +26,15 @@ public class MainViewFW extends FincoDefaultView {
     private JScrollPane JScrollPane1;
     
     private String title;
-    ActionListener AL;
+    //ActionListener AL;
     
     public MainViewFW() {
     	buildDefaultView();
     }
     
-    public MainViewFW(String title, ActionListener AL) {
+    public MainViewFW(String title) {
     	this.title = title;
-    	this.AL = AL;
+    	//this.AL = AL;
     }
     
     private void buildDefaultView() {
@@ -96,7 +96,9 @@ public class MainViewFW extends FincoDefaultView {
 	public void setTableModel(DefaultTableModel model) {
 		JTable1 = new JTable(model);
 	}
-	
+	public JTable getTable() {
+		return JTable1;
+	}
 	public void buildGUI() {
 		setTitle(title);
 		setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
@@ -133,12 +135,11 @@ public class MainViewFW extends FincoDefaultView {
         }
         
         //Add Exit button
-        JButton_Exit.setText("Exit");
+        /*JButton_Exit.setText("Exit");
 		JPanel1.add(JButton_Exit);
 		JButton_Exit.setBounds(468,248,96,31);
-		
-		SymWindow aSymWindow = new SymWindow();
-		this.addWindowListener(aSymWindow);
+		*/
+		this.addWindowListener(new SymWindow());
 		
 	}
 	

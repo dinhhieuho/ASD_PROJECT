@@ -4,9 +4,16 @@ import framework.Finco;
 import framework.ui.FincoView;
 
 public class Ccard extends  Finco{
+	
+
+	public static void main(String[] args) {
+		(new Ccard()).run();
+	}
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		setView(new CcardView());
 		super.run();
 	}
 	
@@ -16,4 +23,5 @@ public class Ccard extends  Finco{
 		super.setView(view);
 	}
 
+	
 }

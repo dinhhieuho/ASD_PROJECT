@@ -6,6 +6,7 @@ import java.util.List;
 import framework.Account;
 import framework.Entry;
 
+
 public  abstract class CcardAccount extends  Account{
 	public CcardAccount(int accNumber) {
 		super(accNumber);
