@@ -3,6 +3,7 @@ package framework.dao;
 import java.util.List;
 import java.util.Optional;
 
+import framework.fincoAccount.Account;
 import framework.fincoCustomer.Customer;
 import framework.fincoCustomer.FincoCustomer;
 
@@ -36,4 +37,12 @@ public interface FincoDao {
 	 * @return
 	 */
 	public Optional<Customer> findCustomerByName(String name);
+	
+	
+	/**
+	 * Retrieves an account by an account number
+	 * @param accountNumber
+	 * @return
+	 */
+	public Optional<Customer> findAccountByAccountNumber(String accountNumber);
 }

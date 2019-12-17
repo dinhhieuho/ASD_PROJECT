@@ -9,4 +9,9 @@ public class Entry implements FincoEntry{
 		this.amount = amount;
 		date = LocalDate.now();
 	}
+	
+	@Override
+	public String toString() {
+		return "Amount: $"+amount+" Date:"+date;
+	}
 }

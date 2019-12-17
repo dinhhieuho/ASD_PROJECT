@@ -9,8 +9,8 @@ public class Account implements FincoAccount {
 	private String accountNumber;
 	private Stack<Entry> entries = new Stack<Entry>();
 	
-	public Account() {
-		this.accountNumber = String.valueOf(Math.random());
+	public Account(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 	
 	public double getBalance() {
@@ -30,4 +30,8 @@ public class Account implements FincoAccount {
 		this.balance = balance;
 	}
 	
+	@Override
+	public String toString() {
+		return "Account no: "+accountNumber+" Last Entry :"+entries == null? "": ""+entries.peek();
+	}
 }

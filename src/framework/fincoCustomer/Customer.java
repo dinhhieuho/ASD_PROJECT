@@ -58,7 +58,9 @@ public class Customer implements FincoCustomer {
 		}
 
 	}
-
+	
+	
+	
 	@Override
 	public void credit(String accountNumber, double amount) throws AccountNotFoundException {
 		Account account = findAccount(accountNumber);
@@ -66,17 +68,37 @@ public class Customer implements FincoCustomer {
 			double balance = account.getBalance() + amount;
 			account.setBalance(balance);
 			account.addEntry(new Entry(balance));
+			printCustomerLog("Account name: "+name+" "+account);
 		}
 		throw new AccountNotFoundException("Account Not Found");
 
 	}
 
-	private Account findAccount(String accountNumber) {
+	public Account findAccount(String accountNumber) {
 		return accounts.get(accountNumber);
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public HashMap<String, Account> getAccounts() {
+		return accounts;
+	}
+	
+	@Override
+	public String toString() {
+		return "{Name: "+name
+				+ ",Street: "+street
+				+ ",City: "+city
+				+ ",State: "+state
+				+ ",Email: "+email
+				+ ",Zip: "+zip
+				+ "}";
+	}
+	
+	private void printCustomerLog(String message) {
+		System.out.println("Finco [INFO]: "+message);
 	}
 
 }

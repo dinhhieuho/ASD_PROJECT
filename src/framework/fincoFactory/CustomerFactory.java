@@ -5,17 +5,17 @@ import framework.fincoEntry.Entry;
 
 public class CustomerFactory implements FincoFactory {
 
-	public Customer createCustomer(String name, String street, String city, String state, int zip, String email) {
+	public Customer createCustomer(String name, String street, String city, String state, int zip, String email,String accountNo) {
 		Customer customer = new Customer(name, street, city, state, email, zip);
-		return customer.addAccount(createAccount());
+		return customer.addAccount(createAccount(accountNo));
 	}
 
 	public Entry createEntry(double amount) {
 		return new Entry(amount);
 	}
 
-	public Account createAccount() {
-		return new Account();
+	public Account createAccount(String accountNo) {
+		return new Account(accountNo);
 	}
 
 }
