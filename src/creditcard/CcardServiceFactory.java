@@ -1,6 +1,6 @@
 package creditcard;
 
-import framework.FincoAccount;
+import framework.fincoAccount.FincoAccount;
 
 public class CcardServiceFactory extends CcardFactory{
 

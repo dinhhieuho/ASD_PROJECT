@@ -1,7 +1,7 @@
 package creditcard;
 
-import framework.CustomerFactory;
-import framework.FincoAccount;
+import framework.fincoAccount.FincoAccount;
+import framework.fincoFactory.CustomerFactory;
 
 public abstract class CcardFactory extends CustomerFactory {
 	public abstract FincoAccount createGoldAccount();

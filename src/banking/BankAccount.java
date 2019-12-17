@@ -1,6 +1,6 @@
 package banking;
 
-import framework.Account;
+import framework.fincoAccount.Account;
 
 public  abstract class BankAccount extends  Account{
 	public BankAccount(int accNumber) {

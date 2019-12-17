@@ -2,7 +2,7 @@ package banking;
 
 import java.time.LocalDate;
 
-import framework.Customer;
+import framework.fincoCustomer.Customer;
 
 
 
