@@ -1,6 +1,6 @@
 package framework.notification;
 
-import framework.FincoCustomer;
+import framework.fincoCustomer.FincoCustomer;
 
 public class Notification implements INotification {
 	private FincoCustomer fcustomer;
@@ -12,7 +12,7 @@ public class Notification implements INotification {
 	}
 
 	public void execute() {
-		fcustomer.sendEmail(accountNumber);
+		fcustomer.sendEmailToCustomer(message, transactionType, accountNumber);
 	}
 	public void setStatus(String status) {
 		this.status = status;
