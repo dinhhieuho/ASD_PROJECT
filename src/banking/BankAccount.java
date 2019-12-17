@@ -1,10 +1,10 @@
 package banking;
 
-import framework.Account;
+import framework.fincoAccount.Account;
 
-public  abstract class BankAccount extends  Account{
-	public BankAccount(int accNumber) {
-		super(accNumber);
+public abstract class BankAccount extends Account {
+	public BankAccount(String accountNumber) {
+		super(accountNumber);
 		// TODO Auto-generated constructor stub
 	}
 

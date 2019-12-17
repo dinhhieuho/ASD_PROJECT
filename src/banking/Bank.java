@@ -1,10 +1,10 @@
 package banking;
 
+
 import framework.Finco;
 import framework.ui.FincoView;
 
-public class Bank extends  Finco{
-	
+public class Bank extends Finco{
 	public static void main(String[] args) {
 		(new Bank()).run();
 	}
@@ -21,5 +21,4 @@ public class Bank extends  Finco{
 		// TODO Auto-generated method stub
 		super.setView(view);
 	}
-
 }

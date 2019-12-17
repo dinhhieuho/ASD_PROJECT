@@ -1,8 +1,5 @@
 package creditcard;
-/*
 
-		A basic implementation of the JDialog class.
-*/
 
 import java.awt.*;
 import javax.swing.*;

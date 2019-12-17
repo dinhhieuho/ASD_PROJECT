@@ -1,7 +1,7 @@
 package creditcard;
 
 public class Silver  extends CcardAccount{
-	public Silver(int accNumber) {
+	public Silver(String accNumber) {
 		super(accNumber);
 		// TODO Auto-generated constructor stub
 	}

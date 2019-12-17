@@ -1,10 +1,13 @@
 package banking;
 
-import framework.CustomerFactory;
-import framework.FincoAccount;
+import framework.fincoAccount.FincoAccount;
+import framework.fincoFactory.CustomerFactory;
 
 public abstract class BankFactory extends CustomerFactory {
-	public abstract FincoAccount createCheckingAccount();
-	public abstract FincoAccount createSavingAccount();
 
+	public BankFactory() {
+		
+	}
+	public abstract FincoAccount createCheckingAccount(String number);
+	public abstract FincoAccount createSavingAccount(String number);
 }

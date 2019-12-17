@@ -2,7 +2,7 @@ package creditcard;
 
 public class Bronze  extends CcardAccount {
 
-	public Bronze(int accNumber) {
+	public Bronze(String accNumber) {
 		super(accNumber);
 		// TODO Auto-generated constructor stub
 	}

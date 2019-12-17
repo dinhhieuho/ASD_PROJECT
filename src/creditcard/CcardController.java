@@ -1,9 +1,16 @@
 package creditcard;
 
+import java.util.Map;
+
 import framework.controller.FincoController;
+import framework.ui.FincoView;
 
-public  abstract class CcardController extends FincoController{
+public class CcardController implements FincoController {
 
-	public abstract void actionHandler();
+	@Override
+	public void actionHandler(Map<String, String> arg, FincoView view) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

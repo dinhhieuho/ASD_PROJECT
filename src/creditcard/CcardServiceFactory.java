@@ -1,25 +1,25 @@
 package creditcard;
 
-import framework.FincoAccount;
+import framework.fincoAccount.FincoAccount;
 
 public class CcardServiceFactory extends CcardFactory{
 
 	@Override
-	public FincoAccount createGoldAccount() {
-		
-		return new Gold(0);
+	public FincoAccount createGoldAccount(String number) {
+		// TODO Auto-generated method stub
+		return new Gold(number);
 	}
 
 	@Override
-	public FincoAccount createSilverAccountt() {
+	public FincoAccount createSilverAccount(String number) {
 		// TODO Auto-generated method stub
-		return new Silver(0);
+		return new Silver(number);
 	}
 
 	@Override
-	public FincoAccount createBronzeAccountt() {
+	public FincoAccount createBronzeAccount(String number) {
 		// TODO Auto-generated method stub
-		return new Bronze(0);
+		return new Bronze(number);
 	}
 
 	
