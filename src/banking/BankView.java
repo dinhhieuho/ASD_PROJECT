@@ -124,10 +124,10 @@ public class BankView extends MainViewFW{
             // add row to table
             rowdata[0] = accountnr;
             rowdata[1] = clientName;
-            rowdata[2] = city;
-            rowdata[3] = "P";
-            rowdata[4] = accountType;
-            rowdata[5] = "0";
+            //rowdata[2] = city;
+            //rowdata[3] = "P";
+            //rowdata[4] = accountType;
+            //rowdata[5] = "0";
             model.addRow(rowdata);
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
