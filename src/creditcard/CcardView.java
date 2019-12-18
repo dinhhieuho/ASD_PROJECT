@@ -3,6 +3,7 @@ package creditcard;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -32,9 +33,14 @@ public class CcardView extends FincoView {
     private Object rowdata[];
     
     CcardController controller = new CcardController();
+    DataAccess da = new DataAccessFacade();
     
     public CcardController getController() {
     	return controller;
+    }
+    
+    public DataAccess getDB() {
+    	return da;
     }
     
 	public CcardView()
@@ -100,7 +106,23 @@ public class CcardView extends FincoView {
 		JButton_GenBill.addActionListener(lSymAction);
 		JButton_Deposit.addActionListener(lSymAction);
 		JButton_Withdraw.addActionListener(lSymAction);
-		
+		loadAccountTable();
+	}
+	
+	private void loadAccountTable() {
+		HashMap<String, CcardAccount> accs = da.readAccountsMap();
+		if(accs!=null) {
+			for(CcardAccount acc: accs.values()) {
+				rowdata[0] = acc.getName();
+	            rowdata[1] = acc.getCC_number();
+	            rowdata[2] = acc.getExp_date().toString();
+	            rowdata[3] = acc.toString();
+	            rowdata[4] = Double.toString(acc.getBalance());
+	            model.addRow(rowdata);
+	            controller.addAccount(acc.getName(), acc);
+			}
+			JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
+		}
 	}
 
 	
@@ -205,13 +227,15 @@ public class CcardView extends FincoView {
             model.addRow(rowdata);
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
+            
+    		System.out.println(da.readAccountsMap());
         }
 
     }
 
 	void JButtonGenerateBill_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		JDialogGenBill billFrm = new JDialogGenBill();
+		JDialogGenBill billFrm = new JDialogGenBill(thisframe);
 		billFrm.setBounds(450, 20, 400, 350);
 		billFrm.show();
 	    
@@ -230,11 +254,14 @@ public class CcardView extends FincoView {
 		    dep.show();
     		
 		    // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
+		    double deposit = Double.parseDouble(amountDeposit);
             String samount = (String)model.getValueAt(selection, 4);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount+deposit;
+            double currentamount = Double.parseDouble(samount);
+            double newamount=currentamount+deposit;
 		    model.setValueAt(String.valueOf(newamount),selection, 4);
+		    
+		    controller.deposit(name, Double.valueOf(deposit));
+		    da.saveNewAccount(controller.getAccounts(name));
 		}
 		
 		
@@ -253,11 +280,16 @@ public class CcardView extends FincoView {
 		    wd.show();
     		
 		    // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
+		    double deposit = Double.parseDouble(amountDeposit);
             String samount = (String)model.getValueAt(selection, 4);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount-deposit;
+            double currentamount = Double.parseDouble(samount);
+            double newamount=currentamount-deposit;
 		    model.setValueAt(String.valueOf(newamount),selection, 4);
+		    
+		    controller.charge(name, Double.valueOf(deposit));
+		    
+		    da.saveNewAccount(controller.getAccounts(name));
+		    
 		    if (newamount <0){
 		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
 		    }

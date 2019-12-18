@@ -11,6 +11,7 @@ import javax.swing.*;
 import framework.Finco;
 import framework.controller.ControllerContext;
 import framework.controller.FincoController;
+import framework.fincoAccount.Account;
 import framework.fincoAccount.FincoAccount;
 
 public class AddCCAccount extends javax.swing.JDialog {
@@ -198,23 +199,27 @@ public class AddCCAccount extends javax.swing.JDialog {
 		catch(Exception e) {
 			localDate = LocalDate.now();
 		}
-		FincoAccount account;
+		Address address = new Address(parentframe.street, parentframe.city, parentframe.state, parentframe.zip);
+		CcardAccount account;
 		if (JRadioButton_Gold.isSelected()) {
 			parentframe.accountType = "Gold";
-			account = factory.createGoldAccount(parentframe.clientName, parentframe.ccnumber, localDate);
+			account = factory.createGoldAccount(parentframe.clientName, parentframe.ccnumber, localDate, address);
 		}
 		else {
 			if (JRadioButton_Silver.isSelected()) {
 				parentframe.accountType = "Silver";
-				account = factory.createSilverAccountt(parentframe.clientName, parentframe.ccnumber, localDate);
+				account = factory.createSilverAccountt(parentframe.clientName, parentframe.ccnumber, localDate, address);
 			}
 			else {
 				parentframe.accountType = "Bronze";
-				account = factory.createBronzeAccountt(parentframe.clientName, parentframe.ccnumber, localDate);
+				account = factory.createBronzeAccountt(parentframe.clientName, parentframe.ccnumber, localDate, address);
 			}
 		}
 
-		parentframe.getController().addAccount(account);
+		parentframe.getController().addAccount(parentframe.clientName,account);
+		
+		parentframe.getDB().saveNewAccount(account);
+		
 		
 		parentframe.newaccount = true;
 
