@@ -1,6 +1,5 @@
 package banking;
 
-import java.time.LocalDate;
 import java.util.EmptyStackException;
 
 import framework.fincoAccount.Account;
@@ -28,12 +27,21 @@ public class Person extends Customer{
 			Entry lastEntry = account.getEntry().peek();
 			double amount = lastEntry.getAmount();
 			if(amount > 500) {
-				super.sendEmail("Transaction");
+				String transtype = lastEntry.getTransType();
+				String name = getName();
+				String message = "Dear "+ name +", "+"your account("+AccNum+") has been "+transtype+" with an amount of $"+amount;
+				super.sendEmail(message);
 			}
 
+			
 		} catch (EmptyStackException e) {
 
 		}
+	}
+	@Override
+	public String negBalanceMesg() {
+		sendEmail(super.negBalanceMesg());
+		return null;
 	}
 
 }

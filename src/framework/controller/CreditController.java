@@ -9,11 +9,16 @@ import framework.dao.FincoDao;
 import framework.dao.FincoDaoImpl;
 import framework.exceptions.AccountNotFoundException;
 import framework.fincoCustomer.Customer;
+import framework.notification.NotificationFactory;
+import framework.notification.NotificationManager;
 import framework.ui.FincoView;
 
 public class CreditController implements FincoController {
 	
 	private FincoDao dao = new FincoDaoImpl();
+	private NotificationFactory nfactory = new  NotificationFactory();
+	private NotificationManager nmanager = new NotificationManager();
+
 	
 	@Override
 	public void actionHandler(Map<String, String> arg,FincoView context) {
@@ -21,6 +26,10 @@ public class CreditController implements FincoController {
 		customer.ifPresent(c->{
 			try {
 				c.credit(arg.get("accNumber"), Double.parseDouble(arg.get("amount")));
+				//
+				nmanager.submit(nfactory.createNotification(customer.get(), arg.get("accNumber")));
+				//
+				
 				JOptionPane.showMessageDialog(context, "Credited Succesfully");
 			} catch (NumberFormatException | AccountNotFoundException e) {
 				//JOptionPane.showMessageDialog(context, "An Exception Occured "+e.getMessage());

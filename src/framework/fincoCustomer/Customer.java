@@ -38,8 +38,7 @@ public class Customer implements FincoCustomer {
 
 	@Override
 	public void sendEmail(String message) {
-		System.out
-				.println("Email Message: " + message + "\n" + "Email address: " + email + "\n Entry Date: " + accounts);
+		System.out.println("Email Address: " + email + "\nEmail Message: " + message);
 
 	}
 
@@ -54,7 +53,7 @@ public class Customer implements FincoCustomer {
 		} else {
 			double balanceLeft = account.getBalance() - amount;
 			account.setBalance(balanceLeft);
-			account.addEntry(new Entry(balanceLeft));
+			account.addEntry(new Entry(amount, "debited"));
 		}
 
 	}
@@ -67,12 +66,16 @@ public class Customer implements FincoCustomer {
 		if (account != null) {
 			double balance = account.getBalance() + amount;
 			account.setBalance(balance);
-			account.addEntry(new Entry(balance));
+			account.addEntry(new Entry(amount, "credited"));
 			printCustomerLog("Account name: "+name+" "+account);
 		}else {
 			throw new AccountNotFoundException("Account Not Found");
 		}
 
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 	public Account findAccount(String accountNumber) {
@@ -99,7 +102,7 @@ public class Customer implements FincoCustomer {
 	}
 	
 	private void printCustomerLog(String message) {
-		System.out.println("Finco [INFO]: "+message);
+		//System.out.println("Finco [INFO]: "+message);
 	}
 	
 	public String getCity() {
@@ -108,6 +111,9 @@ public class Customer implements FincoCustomer {
 	
 	public String getCustomerType() {
 		return "Default";
+	}
+	public String negBalanceMesg() {
+		return "Dear "+name+", your transaction has failed because you don't have enough balance";
 	}
 
 }

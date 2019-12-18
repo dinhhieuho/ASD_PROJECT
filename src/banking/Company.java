@@ -26,7 +26,10 @@ public class Company extends Customer {
 		try {
 			Entry lastEntry = account.getEntry().peek();
 			double amount = lastEntry.getAmount();
-			//if(amount > )
+			String transtype = lastEntry.getTransType();
+			String name = getName();
+			String message = "Dear "+ name +", "+"your account("+AccNum+") has been "+transtype+" with an amount of $"+amount;
+			super.sendEmail(message);
 
 		} catch (EmptyStackException e) {
 
