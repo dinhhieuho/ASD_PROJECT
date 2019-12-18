@@ -105,7 +105,7 @@ public class BankView extends FincoDefaultView {
 			rowdata[0] = account.getAccountNumber();
 			rowdata[1] = customer.getName();
 			rowdata[2] = customer.getCity();
-			rowdata[3] = "P"; // ctype
+			rowdata[3] = customer.getCustomerType(); // ctype
 			rowdata[4] = account.getAccountType(); // atype
 			rowdata[5] = account.getBalance() + "";
 			model.addRow(rowdata);

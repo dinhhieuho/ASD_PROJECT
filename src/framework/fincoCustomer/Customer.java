@@ -105,5 +105,9 @@ public class Customer implements FincoCustomer {
 	public String getCity() {
 		return city;
 	}
+	
+	public String getCustomerType() {
+		return "Default";
+	}
 
 }

@@ -22,7 +22,7 @@ public class InterestController extends BankController{
 		for(Customer c : cs) {
 			HashMap<String, Account> ac = c.getAccounts();
 			Set<String> keys = ac.keySet();
-			keys.forEach(key -> { ac.get(key).addInterest(); System.out.println(ac.get(key).getBalance());});
+			keys.forEach(key -> { ac.get(key).addInterest();});
 			
 			System.out.println(keys);
 		}
