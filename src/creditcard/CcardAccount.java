@@ -6,13 +6,21 @@ import java.util.List;
 import framework.fincoAccount.Account;
 import framework.fincoEntry.Entry;
 
-
 public  abstract class CcardAccount extends  Account{
 	public CcardAccount(String accNumber) {
 		super(accNumber);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public CcardAccount(String name, String cc_number, LocalDate exp_date) {
+		super("");
+		this.name = name;
+		this.cc_number = cc_number;
+		this.exp_date = exp_date;
+		this.lastMonthBalance = lastMonthBalance;
+	}
 
+	private String name;
 	private String cc_number;
 	private LocalDate exp_date;
 	private double lastMonthBalance;
