@@ -46,6 +46,7 @@ public class Customer implements FincoCustomer {
 	public void debit(String accountNumber, double amount) throws AccountNotFoundException,BalanceInsufficientException {
 		Account account = findAccount(accountNumber);
 		if (account == null) {
+			//negBalanceMesg();
 			throw new AccountNotFoundException("Account Not Found");
 		}
 		if (account.getBalance() < amount) {
