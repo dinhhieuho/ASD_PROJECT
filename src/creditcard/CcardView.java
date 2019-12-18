@@ -253,15 +253,17 @@ public class CcardView extends FincoView {
 		    dep.setBounds(430, 15, 275, 140);
 		    dep.show();
     		
-		    // compute new amount
-		    double deposit = Double.parseDouble(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 4);
-            double currentamount = Double.parseDouble(samount);
-            double newamount=currentamount+deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 4);
-		    
-		    controller.deposit(name, Double.valueOf(deposit));
-		    da.saveNewAccount(controller.getAccounts(name));
+		    if(amountDeposit!=null) {
+			    // compute new amount
+			    double deposit = Double.parseDouble(amountDeposit);
+	            String samount = (String)model.getValueAt(selection, 4);
+	            double currentamount = Double.parseDouble(samount);
+	            double newamount=currentamount+deposit;
+			    model.setValueAt(String.valueOf(newamount),selection, 4);
+			    
+			    controller.deposit(name, Double.valueOf(deposit));
+			    da.saveNewAccount(controller.getAccounts(name));
+		    }
 		}
 		
 		
@@ -279,19 +281,21 @@ public class CcardView extends FincoView {
 		    wd.setBounds(430, 15, 275, 140);
 		    wd.show();
     		
-		    // compute new amount
-		    double deposit = Double.parseDouble(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 4);
-            double currentamount = Double.parseDouble(samount);
-            double newamount=currentamount-deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 4);
-		    
-		    controller.charge(name, Double.valueOf(deposit));
-		    
-		    da.saveNewAccount(controller.getAccounts(name));
-		    
-		    if (newamount <0){
-		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
+		    if(amountDeposit!=null) {
+			    // compute new amount
+			    double deposit = Double.parseDouble(amountDeposit);
+	            String samount = (String)model.getValueAt(selection, 4);
+	            double currentamount = Double.parseDouble(samount);
+	            double newamount=currentamount-deposit;
+			    model.setValueAt(String.valueOf(newamount),selection, 4);
+			    
+			    controller.charge(name, Double.valueOf(deposit));
+			    
+			    da.saveNewAccount(controller.getAccounts(name));
+			    
+			    if (newamount <0){
+			       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
+			    }
 		    }
 		}
 		
