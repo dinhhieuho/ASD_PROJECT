@@ -52,4 +52,6 @@ public interface FincoCustomer {
 	 */
 	public void credit(String accountNumber,double amount) throws AccountNotFoundException;
 	
+	public String getCustomerType();
+	
 }

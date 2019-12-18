@@ -1,5 +1,7 @@
 package framework.fincoAccount;
 
+import java.util.Stack;
+
 import framework.fincoEntry.Entry;
 
 /**
@@ -14,8 +16,9 @@ public interface FincoAccount {
 	 * @param entry
 	 */
 	public void addEntry(Entry entry);
+	public Stack<Entry> getEntry();
 	
-	
+	public String  getAccountType();
 	public void addInterest();
 
 }

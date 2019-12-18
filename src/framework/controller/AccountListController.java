@@ -34,14 +34,31 @@ public class AccountListController implements FincoController{
         	rowdata[0] = account.getAccountNumber();
             rowdata[1] = customer.getName();
             rowdata[2] = customer.getCity();
-            rowdata[3] = account.getAccountNumber();
+            rowdata[3] = account.getBalance()+"";
             model.addRow(rowdata);
         }
         
 
         view.setTableModel(model);
-        
-        
+             
+	}
+	
+	public void refreshtable(DefaultTableModel model, FincoView view) {
+		String[] rowdata = new String[4];
+		System.out.println(model.getColumnCount());
+	       
+//	        for(Customer customer : fincoDao.findAll()) {
+//	        	Account account = customer.getAccounts()
+//	        				.entrySet().iterator().next().getValue();
+//	        	rowdata[0] = account.getAccountNumber();
+//	            rowdata[1] = customer.getName();
+//	            rowdata[2] = customer.getCity();
+//	            rowdata[3] = account.getBalance()+"";
+//	            model.addRow(rowdata);
+//	        }
+	        
+
+	        view.setTableModel(model);
 	}
 
 }
