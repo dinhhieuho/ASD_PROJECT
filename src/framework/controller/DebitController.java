@@ -32,7 +32,7 @@ public class DebitController implements FincoController {
 				//
 			} catch (NumberFormatException | AccountNotFoundException | BalanceInsufficientException e) {
 				//System.out.println("Error Occurred " + e.getLocalizedMessage());
-				customer.get().negBalanceMesg();
+				//customer.get().negBalanceMesg();
 				JOptionPane.showMessageDialog(view, "Insufficient Balance");
 			}
 		});
