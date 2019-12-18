@@ -28,7 +28,7 @@ public class CreditController implements FincoController {
 			}
 		});
 		
-		if(customer.isEmpty()) {
+		if(!customer.isPresent()) {
 			JOptionPane.showMessageDialog(context, "Sorry Account not found");
 		}
 		
