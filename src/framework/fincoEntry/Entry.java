@@ -14,4 +14,9 @@ public class Entry implements FincoEntry{
 	public String toString() {
 		return "Amount: $"+amount+" Date:"+date;
 	}
+
+	@Override
+	public double getAmount() {
+		return amount;
+	}
 }

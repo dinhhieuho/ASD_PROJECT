@@ -6,7 +6,9 @@ import framework.fincoEntry.Entry;
 
 public class Account implements FincoAccount {
 	private double balance;
+	
 	private String accountNumber;
+	
 	private Stack<Entry> entries = new Stack<Entry>();
 	
 	public Account(String accountNumber) {
@@ -30,6 +32,7 @@ public class Account implements FincoAccount {
 		this.balance = balance;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "Account no: "+accountNumber+" Last Entry :"+entries == null? "": ""+entries.peek();
@@ -37,7 +40,6 @@ public class Account implements FincoAccount {
 
 	@Override
 	public void addInterest() {
-		// TODO Auto-generated method stub
 		
 	}
 }

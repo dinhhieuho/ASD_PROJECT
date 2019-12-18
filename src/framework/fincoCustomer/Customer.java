@@ -101,5 +101,9 @@ public class Customer implements FincoCustomer {
 	private void printCustomerLog(String message) {
 		System.out.println("Finco [INFO]: "+message);
 	}
+	
+	public String getCity() {
+		return city;
+	}
 
 }

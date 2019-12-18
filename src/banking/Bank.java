@@ -3,22 +3,18 @@ package banking;
 import framework.Finco;
 import framework.ui.FincoView;
 
-public class Bank extends  Finco{
+public class Bank extends Finco{
+	
+	private FincoView view = super.getView();
 	
 	public static void main(String[] args) {
-		(new Bank()).run();
-	}
-	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		setView(new BankView());
-		super.run();
+		Bank bank = new Bank();
+		bank.view.setTitle("Banking Application");
+		bank.view.run();
 	}
 	
 	@Override
 	public void setView(FincoView view) {
-		// TODO Auto-generated method stub
 		super.setView(view);
 	}
 
