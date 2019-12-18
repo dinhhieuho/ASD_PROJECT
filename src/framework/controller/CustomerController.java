@@ -10,6 +10,7 @@ import framework.dao.FincoDaoImpl;
 import framework.fincoCustomer.Customer;
 import framework.fincoFactory.CustomerFactory;
 import framework.fincoFactory.FincoFactory;
+import framework.fincoFactory.TableEventFactory;
 import framework.ui.FincoView;
 
 public class CustomerController implements FincoController {
@@ -28,7 +29,10 @@ public class CustomerController implements FincoController {
 				fincoDao.addCustomer(cust);
 				
 				JOptionPane.showMessageDialog(view, "Account Created");
-				//TODO: Updating of table view
+				
+				//Update table view
+				TableEventFactory.notifyTableListeners(view);
+				
 			} else {
 				JOptionPane.showMessageDialog(view, "Account Exists Already");
 			}

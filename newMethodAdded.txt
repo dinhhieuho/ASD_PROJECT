@@ -1,3 +1,4 @@
 public abstract class FincoController:
 setFincoFactory(FincoFactory fincoFactory)
 FincoFactory getFincoFactory()
+Finco: no run method

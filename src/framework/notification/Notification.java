@@ -1,4 +1,4 @@
-package framework.Notification;
+package framework.notification;
 
 import framework.fincoCustomer.FincoCustomer;
 

@@ -1,23 +1,21 @@
 package framework;
 
+import framework.ui.FincoDefaultView;
 import framework.ui.FincoView;
-import framework.ui.MainViewFW;
 
 public class Finco {
 
-	//FincoView view = new FincoDefaultView();
-	FincoView view;
+	FincoView view = new FincoDefaultView();
 	
 	public static void main(String[] args) {
-		(new Finco()).run();
+		(new Finco()).view.run();
 	}
-	public void run() {
-		if(view==null)
-			view = new MainViewFW();
-		
-		view.run();
-	}
+	
 	public void setView(FincoView view) {
 		this.view = view;
+	}
+	
+	public FincoView getView() {
+		return view;
 	}
 }
