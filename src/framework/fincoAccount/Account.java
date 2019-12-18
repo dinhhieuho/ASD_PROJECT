@@ -46,4 +46,10 @@ public class Account implements FincoAccount {
 	public String  getAccountType() {
 		return this.acctype;
 	}
+
+	@Override
+	public Stack<Entry> getEntry() {
+		
+		return this.entries;
+	}
 }
