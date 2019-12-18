@@ -15,7 +15,7 @@ public interface FincoAccount {
 	 */
 	public void addEntry(Entry entry);
 	
-	
+	public String  getAccountType();
 	public void addInterest();
 
 }

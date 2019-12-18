@@ -6,6 +6,7 @@ import framework.fincoEntry.Entry;
 
 public class Account implements FincoAccount {
 	private double balance;
+	private String acctype = "Default";
 	
 	private String accountNumber;
 	
@@ -41,5 +42,8 @@ public class Account implements FincoAccount {
 	@Override
 	public void addInterest() {
 		
+	}
+	public String  getAccountType() {
+		return this.acctype;
 	}
 }

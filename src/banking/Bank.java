@@ -1,7 +1,5 @@
 package banking;
 
-import javax.swing.JButton;
-
 import framework.Finco;
 import framework.ui.FincoView;
 

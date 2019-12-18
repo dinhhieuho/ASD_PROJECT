@@ -2,6 +2,7 @@ package banking;
 
 public class SavingAccount extends BankAccount{
 	private double balance;
+	private String acctype = "Savings";
 	
 	public SavingAccount(String accNumber) {
 		super(accNumber);
@@ -12,6 +13,7 @@ public class SavingAccount extends BankAccount{
 	@Override
 	public void addInterest() {
 		balance = balance + computeInterest();
+		System.out.println(balance);
 	}
 	
 	private double computeInterest() {
@@ -19,6 +21,22 @@ public class SavingAccount extends BankAccount{
 	}
 	public double getbalance() {
 		return balance;
+	}
+
+	@Override
+	public double getBalance() {
+		return balance;
+	}
+
+	@Override
+	public String getAccountType() {
+
+		return acctype;
+	}
+	
+	@Override
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 
 }

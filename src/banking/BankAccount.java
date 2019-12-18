@@ -8,4 +8,5 @@ public  abstract class BankAccount extends  Account{
 	}
 
 	public abstract void addInterest();
+	public abstract String  getAccountType();
 }

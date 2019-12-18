@@ -3,9 +3,11 @@ package banking;
 public class CheckingAccount extends BankAccount {
 	
 	private double balance ;
+	private String acctype = "Checking";
 	
 	public CheckingAccount(String accNumber) {
 		super(accNumber);
+		this.balance = 0.0;
 	}
 
 
@@ -20,8 +22,21 @@ public class CheckingAccount extends BankAccount {
 		return balance * interestRate;
 	}
 	
-	public double getbalance() {
+	@Override
+	public double getBalance() {
 		return balance;
 	}
+
+	@Override
+	public String getAccountType() {
+
+		return acctype;
+	}
+	
+	@Override
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	
 
 }
