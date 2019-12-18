@@ -1,15 +1,16 @@
 package banking;
 
+import javax.swing.JButton;
+
 import framework.Finco;
 import framework.ui.FincoView;
 
 public class Bank extends Finco{
 	
-	private FincoView view = super.getView();
+	private FincoView view = new BankView();
 	
 	public static void main(String[] args) {
 		Bank bank = new Bank();
-		bank.view.setTitle("Banking Application");
 		bank.view.run();
 	}
 	

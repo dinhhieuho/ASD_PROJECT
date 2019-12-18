@@ -19,8 +19,8 @@ public class PersonFactory extends BankFactory{
 		return new SavingAccount(accNumber);
 	}
 	
-	public Customer createCustomer(String name, String street, String city, String state, int zip, String email, String accountNo, String accType, LocalDate birthdate) {
-		Customer customer = new Person(name, street, city, state, zip, email, birthdate);
+	public Customer createCustomer(String name, String street, String city, String state, int zip, String email, String accountNo, String accType, String dob) {
+		Customer customer = new Person(name, street, city, state, zip, email, dob);
 		if(accType.equalsIgnoreCase("checking"))
 			return customer.addAccount(createCheckingAccount(accountNo));
 		

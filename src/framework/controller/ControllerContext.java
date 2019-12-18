@@ -1,5 +1,6 @@
 package framework.controller;
 
+import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,35 +15,11 @@ public class ControllerContext {
 	FincoController accountListController = new AccountListController();
 	
 	private FincoView context;
+	private HashMap<String, FincoController> cRegister;
 	
 	public ControllerContext(FincoView context) {
 		this.context = context;
-	}
-	
-	public void addCustomer(String name, String street, String city, String state, String zip, String email,String accountNumber) {
-		
-
-		if(!name.isEmpty() && !street.isEmpty() &&
-				!city.isEmpty() && !state.isEmpty() && !zip.isEmpty() 
-				&& !email.isEmpty() && !accountNumber.isEmpty()) {
-
-			Map<String, String> arg = new HashMap<String, String>();
-			
-			arg.put("name",name);
-			arg.put("street",street);
-			arg.put("city",city);
-			arg.put("state",state);
-			arg.put("zip", zip);
-			arg.put("email", email);
-			arg.put("accountNumber",accountNumber);
-			
-			controller.actionHandler(arg,context);
-			
-		}else {
-			JOptionPane.showMessageDialog(context, "All fields are required");
-		}
-		
-		
+		cRegister = new HashMap<String, FincoController>();
 	}
 	
 	public void debitAccount(String accNumber, double amount) {
@@ -68,4 +45,21 @@ public class ControllerContext {
 	public void populateAccounts() {
 		accountListController.actionHandler(null, context);
 	}
+	
+	public void registerPerformer(FincoController fc, String cmdId) {
+		cRegister.put(cmdId, fc);
+	
+	}
+	
+	public void actionEventHandler(ActionEvent e, HashMap<String, String> data) {
+		//System.out.println(e.getActionCommand());
+		if(cRegister.get(e.getActionCommand()) != null) {
+			cRegister.get(e.getActionCommand()).actionHandler(data, context);
+		}
+		else {
+			System.out.println("No match");
+			System.out.println(cRegister);
+		}
+	}
+	
 }

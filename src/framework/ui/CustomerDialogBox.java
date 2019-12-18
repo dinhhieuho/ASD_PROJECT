@@ -2,18 +2,24 @@ package framework.ui;
 
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import framework.controller.ControllerContext;
 
 public class CustomerDialogBox extends JDialog 
 {
     private FincoDefaultView parentframe;
+    private ControllerContext context;
     
-	public CustomerDialogBox(FincoDefaultView parent)
+	public CustomerDialogBox(FincoDefaultView parent, ControllerContext context)
 	{
 		super(parent);
 		parentframe =parent;
+		this.context = context;
 		
 		
 		setTitle("Add Account");
@@ -60,7 +66,7 @@ public class CustomerDialogBox extends JDialog
 		getContentPane().add(JTextField_EM);
 		JTextField_EM.setBounds(84,204,156,20);
 		JButton_OK.setText("OK");
-		JButton_OK.setActionCommand("OK");
+		JButton_OK.setActionCommand("defaultcustomer");
 		getContentPane().add(JButton_OK);
 		JButton_OK.setBounds(48,264,84,24);
 		JButton_Cancel.setText("Cancel");
@@ -155,14 +161,34 @@ public class CustomerDialogBox extends JDialog
 
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
+		String name = JTextField_NAME.getText();
+		String street = JTextField_STR.getText();
+		String city = JTextField_CT.getText();
+		String state = JTextField_CT.getText();
+		String zip = JTextField_ZIP.getText();
+		String email = JTextField_EM.getText();
+		String accountNumber = JTextField_ACNR.getText();
+		if(!name.isEmpty() && !street.isEmpty() &&
+				!city.isEmpty() && !state.isEmpty() && !zip.isEmpty() 
+				&& !email.isEmpty() && !accountNumber.isEmpty()) {
 
+			HashMap<String, String> arg = new HashMap<String, String>();
+			
+			arg.put("name",name);
+			arg.put("street",street);
+			arg.put("city",city);
+			arg.put("state",state);
+			arg.put("zip", zip);
+			arg.put("email", email);
+			arg.put("accountNumber",accountNumber);
+			
+			context.actionEventHandler(event, arg);
+			dispose();
+			
+		}else {
+			JOptionPane.showMessageDialog(this, "All fields are required");
+		}
 		
-		ControllerContext context = new ControllerContext(parentframe);
-		context.addCustomer(JTextField_NAME.getText(), JTextField_STR.getText(),
-						JTextField_CT.getText(), JTextField_STR.getText(),
-						JTextField_ZIP.getText(), JTextField_EM.getText(),JTextField_ACNR.getText());
-		
-		dispose();
 	}
 	
 	

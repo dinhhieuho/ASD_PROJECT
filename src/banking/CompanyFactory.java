@@ -17,6 +17,7 @@ public class CompanyFactory extends BankFactory{
 	
 	public Customer createCustomer(String name, String street, String city, String state, int zip, String email, String accountNo, String accType, int numEmps) {
 		Customer customer = new Company(name, street, city, state, zip, email, numEmps);
+		System.out.println(accType);
 		if(accType.equalsIgnoreCase("checking"))
 			return customer.addAccount(createCheckingAccount(accountNo));
 		
