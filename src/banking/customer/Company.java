@@ -5,9 +5,10 @@ import java.util.EmptyStackException;
 import framework.account.Account;
 import framework.customer.Customer;
 import framework.customer.CustomerDefault;
+import framework.customer.OrganizationDefault;
 import framework.entry.Entry;
 
-public class Company extends CustomerDefault {
+public class Company extends OrganizationDefault {
 
 	private int nr_of_employees;
 	private String ctype = "Company";

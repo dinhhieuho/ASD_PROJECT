@@ -1,19 +1,18 @@
-package framework.fincoobservable;
+package framework.observable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import framework.customer.Customer;
 import framework.ui.FincoView;
 
-public class FincoSubjectService<T  extends FincoObserver> implements FincoSubject<T>{
+public class JtableView<T  extends Listener> implements Subject<T>{
 	
 	
 	private List<T> observers = new ArrayList<>();
 	
 	private FincoView state;
 	
-	public FincoSubjectService(FincoView state) {
+	public JtableView(FincoView state) {
 		this.state = state;
 	}
 

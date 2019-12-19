@@ -1,9 +1,7 @@
 package framework.customer;
 
 import java.util.HashMap;
-
 import framework.account.AccountDefault;
-import framework.entry.Entry;
 import framework.entry.EntryDefault;
 import framework.exceptions.AccountNotFoundException;
 import framework.exceptions.BalanceInsufficientException;
@@ -68,7 +66,6 @@ public class CustomerDefault implements Customer {
 			double balance = account.getBalance() + amount;
 			account.setBalance(balance);
 			account.addEntry(new EntryDefault(amount, "credited"));
-			printCustomerLog("Account name: " + name + " " + account);
 		} else {
 			throw new AccountNotFoundException("Account Not Found");
 		}
@@ -97,10 +94,6 @@ public class CustomerDefault implements Customer {
 				+ ",Zip: " + zip + "}";
 	}
 
-	private void printCustomerLog(String message) {
-		// System.out.println("Finco [INFO]: "+message);
-	}
-
 	public String getCity() {
 		return city;
 	}
@@ -111,6 +104,13 @@ public class CustomerDefault implements Customer {
 
 	public String negBalanceMesg() {
 		return "Dear " + name + ", your transaction has failed because you don't have enough balance";
+	}
+
+	public void printCustomerReport() {
+		while (accounts.entrySet().iterator().next() != null) {
+			AccountDefault account = accounts.entrySet().iterator().next().getValue();
+			System.out.println(name + " | " + account.getAccountNumber() + " | " + account.getBalance());
+		}
 	}
 
 }

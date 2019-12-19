@@ -1,5 +1,5 @@
 package framework.customer;
 
-public abstract class Person implements Customer{
+public interface Person extends Customer{
 
 }

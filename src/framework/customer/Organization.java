@@ -7,6 +7,6 @@ package framework.customer;
  * @author SARFO PHILIP
  *
  */
-public abstract class Organization implements Customer{
+public interface Organization extends Customer{
 	
 }

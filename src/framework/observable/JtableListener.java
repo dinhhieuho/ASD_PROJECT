@@ -1,4 +1,4 @@
-package framework.fincoobservable;
+package framework.observable;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -8,29 +8,26 @@ import framework.dao.DataAccess;
 import framework.dao.DataAccessService;
 import framework.ui.FincoView;
 
-public class FincoTableObserver implements FincoObserver {
+public class JtableListener implements Listener {
 
-	private FincoSubject<FincoObserver> subject;
+	private Subject<Listener> subject;
 
 	DataAccess fincoDao = new DataAccessService();
 
-	public FincoTableObserver(FincoSubject<FincoObserver> subject) {
+	public JtableListener(Subject<Listener> subject) {
 		this.subject = subject;
 	}
 
 	@Override
 	public void update() {
 		FincoView view = subject.getState();
-
 		DefaultTableModel model = new DefaultTableModel();
 		String[] rowdata = new String[4];
-
 		model.addColumn("AccountNr");
 		model.addColumn("Name");
 		model.addColumn("City");
 		model.addColumn("Amount");
 
-	
 		for (CustomerDefault customer : fincoDao.findAll()) {
 			AccountDefault account = customer.getAccounts().entrySet().iterator().next().getValue();
 			rowdata[0] = account.getAccountNumber();
