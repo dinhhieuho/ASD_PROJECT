@@ -3,7 +3,7 @@ package framework.fincoobservable;
 import java.util.ArrayList;
 import java.util.List;
 
-import framework.fincoCustomer.Customer;
+import framework.customer.Customer;
 import framework.ui.FincoView;
 
 public class FincoSubjectService<T  extends FincoObserver> implements FincoSubject<T>{

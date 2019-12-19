@@ -1,5 +1,6 @@
 package banking;
 
+import banking.ui.BankView;
 import framework.Finco;
 import framework.ui.FincoView;
 

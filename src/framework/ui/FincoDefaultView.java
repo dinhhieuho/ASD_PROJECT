@@ -12,11 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import framework.controller.ControllerContext;
-import framework.controller.CustomerController;
-import framework.controller.FincoController;
-import framework.dao.FincoDao;
-import framework.dao.FincoDaoImpl;
+
 
 public class FincoDefaultView extends FincoView {
 
@@ -24,8 +20,8 @@ public class FincoDefaultView extends FincoView {
 	List<JButton> rightButtons = new ArrayList();
 
 	private FincoDefaultView view = this;
-	protected ControllerContext context = new ControllerContext(this); // set context
-	protected FincoDao fincoDao = new FincoDaoImpl(); // db access
+	//protected ControllerContext context = new ControllerContext(this); // set context
+	//protected FincoDao fincoDao = new FincoDaoImpl(); // db access
 
 	// default buttons
 	JButton JButton_Exit = new JButton();
@@ -52,7 +48,7 @@ public class FincoDefaultView extends FincoView {
 
 	public void buildDefaultView() {
 
-		context.populateAccounts();
+		//context.populateAccounts();
 
 		JButton_Customer.setText("Add Customer");
 		JButton_Credit.setText("Credit Account");
@@ -81,10 +77,10 @@ public class FincoDefaultView extends FincoView {
 		JButton_Customer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				registerBtn("defaultcustomer", new CustomerController());
-				CustomerDialogBox pac = new CustomerDialogBox(view, context);
-				pac.setBounds(450, 20, 300, 330);
-				pac.show();
+				//registerBtn("defaultcustomer", new CustomerController());
+				//CustomerDialogBox pac = new CustomerDialogBox(view, context);
+//				pac.setBounds(450, 20, 300, 330);
+//				pac.show();
 
 			}
 		});
@@ -220,24 +216,24 @@ public class FincoDefaultView extends FincoView {
 		this.title = title;
 	}
 
-	public void registerBtn(JButton btn, String actionCommand, FincoController fc) {
-		btn.setActionCommand(actionCommand);
-		context.registerPerformer(fc, actionCommand);
-	}
+//	public void registerBtn(JButton btn, String actionCommand, FincoController fc) {
+//		btn.setActionCommand(actionCommand);
+//		context.registerPerformer(fc, actionCommand);
+//	}
+//
+//	public void registerBtn(String actionCommand, FincoController fc) {
+//		context.registerPerformer(fc, actionCommand);
+//	}
+//
+//	public void actionHandler(ActionEvent e) {
+//		context.actionEventHandler(e, null);
+//
+//	}
 
-	public void registerBtn(String actionCommand, FincoController fc) {
-		context.registerPerformer(fc, actionCommand);
-	}
-
-	public void actionHandler(ActionEvent e) {
-		context.actionEventHandler(e, null);
-
-	}
-
-	public ControllerContext getContext() {
-		return this.context;
-
-	}
+//	public ControllerContext getContext() {
+//		return this.context;
+//
+//	}
 
 	public String retRieveAccNr(DefaultTableModel model) {
 		String accnr = null;

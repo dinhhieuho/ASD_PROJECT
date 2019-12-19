@@ -8,18 +8,16 @@ import java.util.Map;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-import framework.controller.ControllerContext;
-
 public class CustomerDialogBox extends JDialog 
 {
     private FincoDefaultView parentframe;
-    private ControllerContext context;
+    //private ControllerContext context;
     
-	public CustomerDialogBox(FincoDefaultView parent, ControllerContext context)
+	public CustomerDialogBox(FincoDefaultView parent)
 	{
 		super(parent);
 		parentframe =parent;
-		this.context = context;
+	//	this.context = context;
 		
 		
 		setTitle("Add Account");
@@ -182,7 +180,7 @@ public class CustomerDialogBox extends JDialog
 			arg.put("email", email);
 			arg.put("accountNumber",accountNumber);
 			
-			context.actionEventHandler(event, arg);
+		//	context.actionEventHandler(event, arg);
 			dispose();
 			
 		}else {
