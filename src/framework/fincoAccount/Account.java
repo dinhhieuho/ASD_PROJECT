@@ -1,16 +1,10 @@
 package framework.fincoAccount;
 
-import java.io.Serializable;
 import java.util.Stack;
 
 import framework.fincoEntry.Entry;
 
-public class Account implements FincoAccount, Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+public class Account implements FincoAccount {
 	private double balance;
 	
 	private String accountNumber;

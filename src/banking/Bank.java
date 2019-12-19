@@ -8,10 +8,7 @@ public class Bank extends Finco{
 	private FincoView view = super.getView();
 	
 	public static void main(String[] args) {
-		Bank bank = new Bank();
-		bank.setView(new BankView());
-		bank.view.setTitle("Banking Application");
-		bank.view.run();
+		(new Bank()).view.run();
 	}
 	
 	@Override
