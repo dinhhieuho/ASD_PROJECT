@@ -1,7 +1,7 @@
 package banking.ui;
 
 
-import framework.ui.FincoDefaultView;
+import framework.ui.DefaultView;
 
 public class AddAccountView extends javax.swing.JDialog {
 private BankView parentframe;

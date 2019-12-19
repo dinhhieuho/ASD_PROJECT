@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import framework.controller.Controller;
+import framework.factory.CustomerFactory;
 import framework.ui.DebitDialog.SymAction;
 
 /**
@@ -17,17 +19,19 @@ import framework.ui.DebitDialog.SymAction;
  */
 public class CreditDialog extends JDialog{
 	
-	private FincoDefaultView parentframe;
-	
 	JLabel JLabel1 = new JLabel();
 	JLabel JLabel2 = new javax.swing.JLabel();
 	JTextField JTextField_NAME = new JTextField();
 	JButton JButton_OK = new JButton();
 	JButton JButton_Cancel = new JButton();
-	JTextField JTextField_Debit = new JTextField();
+	JTextField JTextField_Crebit = new JTextField();
 	
-	public CreditDialog(FincoDefaultView parentframe) {
-		this.parentframe = parentframe;
+	private Controller controller;
+	private String accnr;
+	
+	public CreditDialog(Controller controller, String accnr) {
+		this.controller = controller;
+		this.accnr = accnr;
 		showDialog();
 	}
 	
@@ -57,8 +61,8 @@ public class CreditDialog extends JDialog{
 		JButton_Cancel.setActionCommand("Cancel");
 		getContentPane().add(JButton_Cancel);
 		JButton_Cancel.setBounds(156, 84, 84, 24);
-		getContentPane().add(JTextField_Debit);
-		JTextField_Debit.setBounds(84, 48, 144, 24);
+		getContentPane().add(JTextField_Crebit);
+		JTextField_Crebit.setBounds(84, 48, 144, 24);
 
 		SymAction lSymAction = new SymAction();
 		JButton_OK.addActionListener(lSymAction);
@@ -76,14 +80,16 @@ public class CreditDialog extends JDialog{
 	}
 
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event) {
-		// parentframe.amountDeposit = JTextField_Deposit.getText();
-//		ControllerContext context = new ControllerContext(parentframe);
-//		try {
-//			context.creditAccount(JTextField_NAME.getText(), Double.parseDouble(JTextField_Debit.getText()));
-//			dispose();
-//		} catch (NumberFormatException e) {
-//			JOptionPane.showMessageDialog(parentframe, "Invalid amount entered");
-//		}
+		try {
+			String response = controller.credit(Double.parseDouble(JTextField_Crebit.getText()), JTextField_NAME.getText());
+			if(response != null)
+				JOptionPane.showMessageDialog(this, response);
+			else
+				JOptionPane.showMessageDialog(this, "Transaction completed successfully!");
+			dispose();
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "Invalid amount entered");
+		}
 	}
 
 	void JButtonCalcel_actionPerformed(java.awt.event.ActionEvent event) {

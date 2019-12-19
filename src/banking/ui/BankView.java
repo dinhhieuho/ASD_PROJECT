@@ -5,9 +5,9 @@ import javax.swing.table.DefaultTableModel;
 
 import framework.account.Account;
 import framework.customer.Customer;
-import framework.ui.FincoDefaultView;
+import framework.ui.DefaultView;
 
-public class BankView extends FincoDefaultView {
+public class BankView extends DefaultView {
 
 	DefaultTableModel model;
 

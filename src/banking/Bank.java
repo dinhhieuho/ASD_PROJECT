@@ -11,6 +11,7 @@ public class Bank extends Finco{
 	public static void main(String[] args) {
 		Bank bank = new Bank();
 		bank.view.run();
+		//Finco.main(args);
 	}
 	
 	@Override

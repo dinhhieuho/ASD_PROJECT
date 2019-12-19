@@ -12,96 +12,76 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import framework.controller.Controller;
+import framework.factory.CustomerFactory;
 
+public class DefaultView extends FincoView {
 
-public class FincoDefaultView extends FincoView {
-
-	List<JButton> topButtons = new ArrayList();
-	List<JButton> rightButtons = new ArrayList();
-
-	private FincoDefaultView view = this;
-	//protected ControllerContext context = new ControllerContext(this); // set context
-	//protected FincoDao fincoDao = new FincoDaoImpl(); // db access
+	// list of buttons for customization
+	private List<JButton> topButtons = new ArrayList();
+	private List<JButton> rightButtons = new ArrayList();
 
 	// default buttons
-	JButton JButton_Exit = new JButton();
-	JButton JButton_Customer = new JButton();
-	JButton JButton_Credit = new JButton();
+	JButton JButton_Exit = new JButton("Exit");
+	JButton JButton_Customer = new JButton("Add Customer");
+	JButton JButton_Credit = new JButton("Credit Account");
+	JButton JButton_Debit = new JButton("Debit Account");
 
+	// view panel
 	JPanel JPanel1 = new JPanel();
 
-	private JTable JTable1;
+	// table for listing customers
+	private TableView customerList;
+	private Object[] defaultColumns = { "AccountNr", "Name", "City", "Amount" }; // default columns
+
+	// Scroll pane
 	private JScrollPane JScrollPane1;
 
-	private String title;
-	ActionListener AL;
+	// Frame title
+	private String title = "Finco FrameWork";
 
-	public FincoDefaultView() {
-		buildDefaultView();
+	// controller for business logic
+	private Controller controller;
+
+	// factory for creating new customers
+	CustomerFactory customerFactory;
+
+	public DefaultView(Controller controller) {
+		this.controller = controller;
+		customerFactory = new CustomerFactory(); // default factory
 	}
 
-	public FincoDefaultView(String title, ActionListener AL) {
-		this.title = title;
-		this.AL = AL;
-		setFincoViewTitle("Finco Default View");
-	}
-
-	public void buildDefaultView() {
-
-		//context.populateAccounts();
-
-		JButton_Customer.setText("Add Customer");
-		JButton_Credit.setText("Credit Account");
-
+	{
+		// default Top buttons;
 		addTopButton(JButton_Customer);
 		addTopButton(JButton_Credit);
-		// addTopButton(JButton_Credit1);
 
-		JButton JButton_Debit = new JButton();
-		JButton_Debit.setText("Debit Account");
-
+		// default Right buttons;
 		addRightButton(JButton_Debit);
+	}
+	// set actionlisteners for default buttons
+	{
+		JButton_Customer.addActionListener(e -> {
+			CustomerDialogBox pac = new CustomerDialogBox(customerFactory, controller);
+			pac.setBounds(450, 20, 300, 330);
+			pac.show();
+		});
 
-		buildGUI();
-
-		/*
-		 * SymAction lSymAction = new SymAction();
-		 * JButton_Exit.addActionListener(lSymAction);
-		 * JButton_PerAC.addActionListener(lSymAction);
-		 * JButton_CompAC.addActionListener(lSymAction);
-		 * JButton_Deposit.addActionListener(lSymAction);
-		 * JButton_Withdraw.addActionListener(lSymAction);
-		 * JButton_Addinterest.addActionListener(lSymAction);
-		 */
-
-		JButton_Customer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//registerBtn("defaultcustomer", new CustomerController());
-				//CustomerDialogBox pac = new CustomerDialogBox(view, context);
-//				pac.setBounds(450, 20, 300, 330);
-//				pac.show();
-
+		JButton_Debit.addActionListener(e -> {
+			String accnr = retRieveAccNr(customerList.getTvModel());
+			if (accnr != null) {
+				DebitDialog pac = new DebitDialog(controller,accnr);
+				pac.setBounds(450, 20, 300, 330);
+				pac.show();
 			}
 		});
 
-		JButton_Debit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				DebitDialog debitDialog = new DebitDialog(view);
-				debitDialog.setBounds(450, 20, 300, 330);
-				debitDialog.show();
-			}
-		});
-
-		JButton_Credit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				CreditDialog creditDialog = new CreditDialog(view);
-				creditDialog.setBounds(450, 20, 300, 330);
-				creditDialog.show();
+		JButton_Credit.addActionListener(e -> {
+			String accnr = retRieveAccNr(customerList.getTvModel());
+			if (accnr != null) {
+				CreditDialog pac = new CreditDialog(controller, accnr);
+				pac.setBounds(450, 20, 300, 330);
+				pac.show();
 			}
 		});
 
@@ -115,14 +95,14 @@ public class FincoDefaultView extends FincoView {
 		rightButtons.add(btn);
 	}
 
-	@Override
+	@Override // not necessary
 	public void setTableModel(DefaultTableModel model) {
-		JTable1 = new JTable(model);
+		customerList.setModel(model);
 	}
 
-	@Override
+	@Override // not necessary
 	public void updateTableModel(DefaultTableModel model) {
-		JTable1.setModel(model);
+		customerList.setModel(model);
 	}
 
 	public void buildGUI() {
@@ -136,11 +116,11 @@ public class FincoDefaultView extends FincoView {
 		JPanel1.setBounds(0, 0, 575, 310);
 
 		JScrollPane1 = new JScrollPane();
-
+		customerList = new TableView(defaultColumns);
 		JPanel1.add(JScrollPane1);
 		JScrollPane1.setBounds(12, 92, 444, 160);
-		JScrollPane1.getViewport().add(JTable1);
-		JTable1.setBounds(0, 0, 420, 0);
+		JScrollPane1.getViewport().add(customerList);
+		customerList.setBounds(0, 0, 420, 0);
 
 		// Add Top buttons
 		int count = 0;
@@ -154,12 +134,11 @@ public class FincoDefaultView extends FincoView {
 		count = 0;
 		for (JButton btn : rightButtons) {
 			JPanel1.add(btn);
-			btn.setBounds(468, 104 + (count * 60), 96, 33);
+			btn.setBounds(468, 104 + (count * 50), 96, 33);
 			count++;
 		}
 
 		// Add Exit button
-		JButton_Exit.setText("Exit");
 		JPanel1.add(JButton_Exit);
 		JButton_Exit.setBounds(468, 248, 96, 31);
 
@@ -179,7 +158,7 @@ public class FincoDefaultView extends FincoView {
 	class SymWindow extends java.awt.event.WindowAdapter {
 		public void windowClosing(java.awt.event.WindowEvent event) {
 			Object object = event.getSource();
-			if (object == FincoDefaultView.this)
+			if (object == DefaultView.this)
 				MainViewFW_windowClosing(event);
 		}
 	}
@@ -208,6 +187,7 @@ public class FincoDefaultView extends FincoView {
 
 	@Override
 	public void run() {
+		buildGUI();
 		this.setVisible(true);
 	}
 
@@ -216,28 +196,17 @@ public class FincoDefaultView extends FincoView {
 		this.title = title;
 	}
 
-//	public void registerBtn(JButton btn, String actionCommand, FincoController fc) {
-//		btn.setActionCommand(actionCommand);
-//		context.registerPerformer(fc, actionCommand);
-//	}
-//
-//	public void registerBtn(String actionCommand, FincoController fc) {
-//		context.registerPerformer(fc, actionCommand);
-//	}
-//
-//	public void actionHandler(ActionEvent e) {
-//		context.actionEventHandler(e, null);
-//
-//	}
+	public void setTableColumns(Object[] tableColumns) {
+		this.defaultColumns = tableColumns;
+	}
 
-//	public ControllerContext getContext() {
-//		return this.context;
-//
-//	}
+	public void setFactory(CustomerFactory customerFactory) {
+		this.customerFactory = customerFactory;
+	}
 
 	public String retRieveAccNr(DefaultTableModel model) {
 		String accnr = null;
-		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+		int selection = customerList.getSelectionModel().getMinSelectionIndex();
 		if (selection >= 0) {
 			accnr = (String) model.getValueAt(selection, 0);
 		}

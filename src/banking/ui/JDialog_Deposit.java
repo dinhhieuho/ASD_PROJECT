@@ -4,15 +4,15 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
-import framework.ui.FincoDefaultView;
+import framework.ui.DefaultView;
 
 public class JDialog_Deposit extends javax.swing.JDialog {
 
 	private String accnr;
 	//private ControllerContext context;
-	private FincoDefaultView parentframe;
+	private DefaultView parentframe;
 
-	public JDialog_Deposit(FincoDefaultView parent, String accnr) {
+	public JDialog_Deposit(DefaultView parent, String accnr) {
 		super(parent);
 		parentframe = parent;
 		//this.context = context;

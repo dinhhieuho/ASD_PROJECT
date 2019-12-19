@@ -4,16 +4,16 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
-import framework.ui.FincoDefaultView;
+import framework.ui.DefaultView;
 
 
 
 public class JDialog_AddCompAcc extends javax.swing.JDialog
 {
 //	private ControllerContext context;
-    private FincoDefaultView parentframe;
+    private DefaultView parentframe;
     
-	public JDialog_AddCompAcc(FincoDefaultView parent)
+	public JDialog_AddCompAcc(DefaultView parent)
 	{
 		super(parent);
 		parentframe=parent;

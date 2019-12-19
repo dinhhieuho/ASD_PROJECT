@@ -7,7 +7,7 @@ import framework.entry.EntryDefault;
 
 public class CustomerFactory {
 
-	public static Customer createCustomer(String name, String street, String city, String state, int zip, String email,String accountNo) {
+	public  CustomerDefault createCustomer(String name, String street, String city, String state, int zip, String email,String accountNo) {
 		CustomerDefault customer = new CustomerDefault(name, street, city, state, email, zip);
 		return customer.addAccount(createAccount(accountNo));
 	}

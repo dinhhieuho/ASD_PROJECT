@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
-import framework.ui.FincoDefaultView;
+import framework.ui.DefaultView;
 
 
 
@@ -13,9 +13,9 @@ public class JDialog_Withdraw extends javax.swing.JDialog
    
 	private String accnr;
 	//private ControllerContext context;
-	private FincoDefaultView parentframe;
+	private DefaultView parentframe;
 
-	public JDialog_Withdraw(FincoDefaultView parent, String accnr) {
+	public JDialog_Withdraw(DefaultView parent, String accnr) {
 		super(parent);
 		parentframe = parent;
 		accnr = accnr;

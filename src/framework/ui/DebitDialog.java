@@ -6,9 +6,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import framework.controller.Controller;
+
 public class DebitDialog extends JDialog {
 
-	private FincoDefaultView parentframe;
+	private Controller controller;
+	String accnr;
 
 	JLabel JLabel1 = new JLabel();
 	JLabel JLabel2 = new javax.swing.JLabel();
@@ -17,9 +20,9 @@ public class DebitDialog extends JDialog {
 	JButton JButton_Cancel = new JButton();
 	JTextField JTextField_Debit = new JTextField();
 
-	public DebitDialog(FincoDefaultView parentframe) {
-		this.parentframe = parentframe;
-
+	public DebitDialog(Controller controller, String accnr) {
+		this.controller = controller;
+		this.accnr = accnr;
 		showDialog();
 	}
 
@@ -69,13 +72,17 @@ public class DebitDialog extends JDialog {
 
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event) {
 		// parentframe.amountDeposit = JTextField_Deposit.getText();
-//		ControllerContext context = new ControllerContext(parentframe);
-//		try {
-//			context.debitAccount(JTextField_NAME.getText(), Double.parseDouble(JTextField_Debit.getText()));
-//			dispose();
-//		} catch (NumberFormatException e) {
-//			JOptionPane.showMessageDialog(parentframe, "Invalid amount entered");
-//		}
+		
+		try {
+			String response = controller.debit(Double.parseDouble(JTextField_Debit.getText()), JTextField_NAME.getText());
+			if(response != null)
+				JOptionPane.showMessageDialog(this, response);
+			else
+				JOptionPane.showMessageDialog(this, "Transaction completed successfully!");
+			dispose();
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "Invalid amount entered");
+		}
 	}
 
 	void JButtonCalcel_actionPerformed(java.awt.event.ActionEvent event) {
