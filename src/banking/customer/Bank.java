@@ -1,4 +1,4 @@
-package banking;
+package banking.customer;
 
 import banking.ui.BankView;
 import framework.Finco;

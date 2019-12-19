@@ -2,17 +2,17 @@ package framework.fincoobservable;
 
 import javax.swing.table.DefaultTableModel;
 
-import framework.dao.FincoDao;
-import framework.dao.FincoDaoImpl;
-import framework.fincoAccount.Account;
-import framework.fincoCustomer.Customer;
+import framework.account.AccountDefault;
+import framework.customer.CustomerDefault;
+import framework.dao.DataAccess;
+import framework.dao.DataAccessService;
 import framework.ui.FincoView;
 
 public class FincoTableObserver implements FincoObserver {
 
 	private FincoSubject<FincoObserver> subject;
 
-	FincoDao fincoDao = new FincoDaoImpl();
+	DataAccess fincoDao = new DataAccessService();
 
 	public FincoTableObserver(FincoSubject<FincoObserver> subject) {
 		this.subject = subject;
@@ -31,12 +31,12 @@ public class FincoTableObserver implements FincoObserver {
 		model.addColumn("Amount");
 
 	
-		for (Customer customer : fincoDao.findAll()) {
-			Account account = customer.getAccounts().entrySet().iterator().next().getValue();
+		for (CustomerDefault customer : fincoDao.findAll()) {
+			AccountDefault account = customer.getAccounts().entrySet().iterator().next().getValue();
 			rowdata[0] = account.getAccountNumber();
 			rowdata[1] = customer.getName();
 			rowdata[2] = customer.getCity();
-			rowdata[3] = account.getAccountNumber();
+			rowdata[3] = String.valueOf(account.getBalance());
 			model.addRow(rowdata);
 		}
 		view.updateTableModel(model);
