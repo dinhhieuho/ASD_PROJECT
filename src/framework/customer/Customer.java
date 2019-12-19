@@ -19,7 +19,7 @@ public interface Customer {
 	 * @param account {@code account is added to a customer account}
 	 * supports chaining
 	 */
-	public Customer addAccount(AccountDefault account);
+	public CustomerDefault addAccount(AccountDefault account);
 	
 	
 	/**

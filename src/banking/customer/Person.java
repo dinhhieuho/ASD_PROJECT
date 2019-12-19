@@ -5,6 +5,8 @@ import java.util.EmptyStackException;
 import framework.account.Account;
 import framework.customer.PersonDefault;
 import framework.entry.Entry;
+import framework.exceptions.AccountNotFoundException;
+import framework.exceptions.BalanceInsufficientException;
 
 public class Person extends  PersonDefault{
 	private String birthDate; // using string for now, will convert to localdate later
@@ -42,6 +44,21 @@ public class Person extends  PersonDefault{
 	public String negBalanceMesg() {
 		sendEmail(super.negBalanceMesg());
 		return null;
+	}
+	
+	@Override
+	public void debit(String accountNumber, double amount)
+			throws AccountNotFoundException, BalanceInsufficientException {
+		super.debit(accountNumber, amount);
+		sendEmail(accountNumber);
+		negBalanceMesg();
+	}
+	
+	@Override
+	public void credit(String accountNumber, double amount) throws AccountNotFoundException {
+		super.credit(accountNumber, amount);
+		sendEmail(accountNumber);
+		negBalanceMesg();
 	}
 
 }

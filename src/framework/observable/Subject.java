@@ -1,6 +1,6 @@
 package framework.observable;
 
-import framework.ui.FincoView;
+import framework.ui.GUI;
 
 public interface Subject<T extends Listener> {
 	
@@ -8,5 +8,5 @@ public interface Subject<T extends Listener> {
 
 	public void notifyChanged();
 
-	public FincoView getState();
+	public GUI getState();
 }

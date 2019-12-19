@@ -1,8 +1,5 @@
 package framework.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 

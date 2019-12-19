@@ -5,6 +5,7 @@ import banking.account.SavingAccount;
 import banking.customer.Person;
 import framework.account.AccountDefault;
 import framework.customer.Customer;
+import framework.customer.CustomerDefault;
 
 public class PersonFactory extends BankFactory{
 
@@ -20,7 +21,7 @@ public class PersonFactory extends BankFactory{
 		return new SavingAccount(accNumber);
 	}
 	
-	public Customer createCustomer(String name, String street, String city, String state, int zip, String email, String accountNo, String accType, String dob) {
+	public CustomerDefault createCustomer(String name, String street, String city, String state, int zip, String email, String accountNo, String accType, String dob) {
 		Customer customer = new Person(name, street, city, state, zip, email, dob);
 		if(accType.equalsIgnoreCase("checking"))
 			return customer.addAccount(createCheckingAccount(accountNo));

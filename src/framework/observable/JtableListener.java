@@ -6,7 +6,7 @@ import framework.account.AccountDefault;
 import framework.customer.CustomerDefault;
 import framework.dao.DataAccess;
 import framework.dao.DataAccessService;
-import framework.ui.FincoView;
+import framework.ui.GUI;
 
 public class JtableListener implements Listener {
 
@@ -20,7 +20,7 @@ public class JtableListener implements Listener {
 
 	@Override
 	public void update() {
-		FincoView view = subject.getState();
+		GUI view = subject.getState();
 		DefaultTableModel model = new DefaultTableModel();
 		String[] rowdata = new String[4];
 		model.addColumn("AccountNr");

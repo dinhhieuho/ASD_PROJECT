@@ -3,11 +3,11 @@ package banking.ui;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
-import framework.account.Account;
-import framework.customer.Customer;
-import framework.ui.DefaultView;
+import banking.factory.BankFactory;
+import framework.controller.Controller;
+import framework.ui.DefaultGUI;
 
-public class BankView extends DefaultView {
+public class BankGUI extends DefaultGUI {
 
 	DefaultTableModel model;
 
@@ -17,18 +17,28 @@ public class BankView extends DefaultView {
 	JButton addInterest = new JButton("Add Interest");
 	JButton deposit = new JButton("Deposit");
 	JButton withdraw = new JButton("Withdraw");
-
-	public BankView() {
+	JButton report = new JButton("Report");
+	
+	// controller for business logic
+	private Controller controller;
+	
+	private BankFactory bankFactory;
+	
+	
+	public BankGUI(Controller controller) {
+		super(controller);
 		setTitle("Bank Application");
 
 		// set button bounds
 		addPersonal.setBounds(240, 20, 192, 33);
 		addInterest.setBounds(448, 20, 106, 33);
+		
 
 		addTopButton(addPersonal);
 		addTopButton(addCompany);
 		addTopButton(addInterest);
-		
+		addTopButton(report);
+
 		addRightButton(deposit);
 		addRightButton(withdraw);
 		
@@ -40,41 +50,45 @@ public class BankView extends DefaultView {
 			refreshTable();
 		});
 		addCompany.addActionListener(e -> {
-			//JDialog_AddCompAcc pac = new JDialog_AddCompAcc(this, context);
-//				pac.setBounds(450, 20, 300, 330);
-//				pac.show();
-				//
+			JDialog_AddCompAcc pac = new JDialog_AddCompAcc(this,bankFactory,controller);
+				pac.setBounds(450, 20, 300, 330);
+				pac.show();
+				
 				refreshTable();
 		});
 		
 		addPersonal.addActionListener(e -> {
-//			JDialog_AddPAcc pac = new JDialog_AddPAcc(this, context);
-//				pac.setBounds(450, 20, 300, 330);
-//				pac.show();
-//				//
-//				refreshTable();
+			JDialog_AddPAcc pac = new JDialog_AddPAcc(this,controller);
+				pac.setBounds(450, 20, 300, 330);
+				pac.show();
+				//
+				refreshTable();
 		});
 		
 		deposit.addActionListener(e -> {
 			String accnr = retRieveAccNr(model);
 			if(accnr != null) {
-//			JDialog_Deposit pac = new JDialog_Deposit(this, context,accnr);
-//				pac.setBounds(450, 20, 300, 330);
-//				pac.show();
-//				//
-//				refreshTable();
+			JDialog_Deposit pac = new JDialog_Deposit(this,accnr,controller);
+				pac.setBounds(450, 20, 300, 330);
+				pac.show();
+				//
+				refreshTable();
 			}
 		});
 		
 		withdraw.addActionListener(e -> {
 			String accnr = retRieveAccNr(model);
 			if(accnr != null) {
-//			JDialog_Withdraw pac = new JDialog_Withdraw(this, context,accnr);
-//				pac.setBounds(450, 20, 300, 330);
-//				pac.show();
+			JDialog_Withdraw pac = new JDialog_Withdraw(this,accnr,controller);
+				pac.setBounds(450, 20, 300, 330);
+				pac.show();
 //				//
 //				refreshTable();
 			}
+		});
+		
+		report.addActionListener(e->{
+			controller.generateReport();
 		});
 		
 		
@@ -113,19 +127,4 @@ public class BankView extends DefaultView {
 		updateTableModel(model);
 	}
 
-	@Override
-	public void buildDefaultView() {
-		// table columns
-		model = new DefaultTableModel();
-		model.addColumn("AccountNr");
-		model.addColumn("Name");
-		model.addColumn("City");
-		model.addColumn("P/C");
-		model.addColumn("Ch/S");
-		model.addColumn("Amount");
-
-		setTableModel(model);
-		// ControllerContext context = new ControllerContext(this);
-		// super.context.populateAccounts();
-	}
 }

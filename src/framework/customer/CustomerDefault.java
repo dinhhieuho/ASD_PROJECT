@@ -1,6 +1,8 @@
 package framework.customer;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
+
 import framework.account.AccountDefault;
 import framework.entry.EntryDefault;
 import framework.exceptions.AccountNotFoundException;
@@ -106,10 +108,10 @@ public class CustomerDefault implements Customer {
 		return "Dear " + name + ", your transaction has failed because you don't have enough balance";
 	}
 
-	public void printCustomerReport() {
-		while (accounts.entrySet().iterator().next() != null) {
-			AccountDefault account = accounts.entrySet().iterator().next().getValue();
-			System.out.println(name + " | " + account.getAccountNumber() + " | " + account.getBalance());
+	public void printCustomerReport() {	
+		for(Entry<String, AccountDefault> entry : accounts.entrySet()) {
+			AccountDefault account = entry.getValue();
+			System.out.println(name + " | " + account.getAccountNumber() + " | " + account.getBalance()+" | "+account.getAccountType());
 		}
 	}
 

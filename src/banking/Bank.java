@@ -1,21 +1,20 @@
 package banking;
 
-import banking.ui.BankView;
+import banking.ui.BankGUI;
 import framework.Finco;
-import framework.ui.FincoView;
+import framework.ui.GUI;
 
 public class Bank extends Finco{
 	
-	private FincoView view = new BankView();
+	private GUI gui = new BankGUI(super.controller);
 	
 	public static void main(String[] args) {
 		Bank bank = new Bank();
-		bank.view.run();
-		//Finco.main(args);
+		bank.gui.run();
 	}
 	
 	@Override
-	public void setView(FincoView view) {
+	public void setView(GUI view) {
 		super.setView(view);
 	}
 
