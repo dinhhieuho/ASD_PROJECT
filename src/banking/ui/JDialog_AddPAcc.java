@@ -9,14 +9,14 @@ import java.util.HashMap;
 import javax.swing.*;
 
 //import framework.controller_oldversion.ControllerContext;
-import framework.ui.FincoDefaultView;
+import framework.ui.DefaultView;
 
 public class JDialog_AddPAcc extends javax.swing.JDialog
 {
 	//private ControllerContext context;
-    private FincoDefaultView parentframe;
+    private DefaultView parentframe;
     
-	public JDialog_AddPAcc(FincoDefaultView parent)
+	public JDialog_AddPAcc(DefaultView parent)
 	{
 		super(parent);
 		parentframe=parent;
