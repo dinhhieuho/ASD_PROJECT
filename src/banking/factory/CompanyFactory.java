@@ -1,6 +1,7 @@
 package banking.factory;
 
 import banking.account.CheckingAccount;
+import banking.account.SavingAccount;
 import banking.customer.Company;
 import framework.account.AccountDefault;
 import framework.customer.Customer;
@@ -15,7 +16,7 @@ public class CompanyFactory extends BankFactory{
 
 	@Override
 	public AccountDefault createSavingAccount(String accNumber) {
-		return new CheckingAccount(accNumber);
+		return new SavingAccount(accNumber);
 	}
 	
 	public CustomerDefault createCustomer(String name, String street, String city, String state, int zip, String email, String accountNo, String accType, int numEmps) {

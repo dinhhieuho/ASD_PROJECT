@@ -92,6 +92,7 @@ public class CustomerDefault implements Customer {
 
 	@Override
 	public String toString() {
+		printCustomerReport();
 		return "{Name: " + name + ",Street: " + street + ",City: " + city + ",State: " + state + ",Email: " + email
 				+ ",Zip: " + zip + "}";
 	}

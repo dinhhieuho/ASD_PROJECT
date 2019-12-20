@@ -1,6 +1,5 @@
 package framework.customer;
 
-import framework.account.Account;
 import framework.account.AccountDefault;
 import framework.exceptions.AccountNotFoundException;
 import framework.exceptions.BalanceInsufficientException;

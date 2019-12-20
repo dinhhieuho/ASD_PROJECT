@@ -3,14 +3,13 @@ package framework.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.table.DefaultTableModel;
-
-import framework.account.AccountDefault;
+import creditcard.customer.CustomerCcard;
+import creditcard.dataacess.CardDataAccess;
+import framework.customer.Customer;
 import framework.customer.CustomerDefault;
 import framework.dao.DataAccess;
 import framework.exceptions.AccountNotFoundException;
 import framework.exceptions.BalanceInsufficientException;
-import framework.ui.GUI;
 
 public class Controller {
 
@@ -20,9 +19,10 @@ public class Controller {
 		this.dataAccess = dataAccess;
 	}
 
-	public void addCustomer(CustomerDefault customer) {
+	public <T extends CustomerDefault> void addCustomer(T customer) {
 		// perform some logic before saving
 		dataAccess.addCustomer(customer);
+
 	}
 
 	public String debit(double amount, String accountNumber) {
@@ -49,6 +49,7 @@ public class Controller {
 		if (customer.isPresent()) {
 			try {
 				customer.get().credit(accountNumber, amount);
+
 			} catch (AccountNotFoundException e) {
 
 				response = "Account Not Found"; // not reached
@@ -64,5 +65,8 @@ public class Controller {
 		customer.forEach(CustomerDefault::printCustomerReport);
 	}
 
-	
+	public List<CustomerDefault> loadAccounts() {
+		return dataAccess.findAll();
+	}
+
 }

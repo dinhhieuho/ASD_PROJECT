@@ -16,8 +16,7 @@ public class PersonFactory extends BankFactory{
 	}
 
 	@Override
-	public AccountDefault createSavingAccount(String accNumber) {
-		
+	public AccountDefault createSavingAccount(String accNumber) {	
 		return new SavingAccount(accNumber);
 	}
 	

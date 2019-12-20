@@ -8,7 +8,7 @@ import framework.ui.GUI;
 
 public class Finco {
 
-	private static DataAccess dao = new DataAccessService();
+	protected static DataAccess dao = new DataAccessService();
 	protected static Controller controller = new Controller(dao);
 	protected static GUI view = new DefaultGUI(controller);
 	
