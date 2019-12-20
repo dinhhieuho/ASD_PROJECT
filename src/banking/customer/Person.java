@@ -3,12 +3,13 @@ package banking.customer;
 import java.util.EmptyStackException;
 
 import framework.account.Account;
+import framework.customer.CustomerDefault;
 import framework.customer.PersonDefault;
 import framework.entry.Entry;
 import framework.exceptions.AccountNotFoundException;
 import framework.exceptions.BalanceInsufficientException;
 
-public class Person extends  PersonDefault{
+public class Person extends  CustomerDefault{
 	private String birthDate; // using string for now, will convert to localdate later
 	private String ctype = "Person";
 
@@ -42,23 +43,28 @@ public class Person extends  PersonDefault{
 
 	@Override
 	public String negBalanceMesg() {
-		sendEmail(super.negBalanceMesg());
+		super.sendEmail("Dear " + super.getName() + ", your transaction has failed because you don't have enough balance");
 		return null;
 	}
 	
 	@Override
 	public void debit(String accountNumber, double amount)
 			throws AccountNotFoundException, BalanceInsufficientException {
-		super.debit(accountNumber, amount);
+		try {
+			super.debit(accountNumber, amount);
+		}
+		catch(AccountNotFoundException | BalanceInsufficientException e) {
+			negBalanceMesg();
+			 throw new BalanceInsufficientException("Insufficient Balance");
+		}
 		sendEmail(accountNumber);
-		negBalanceMesg();
+
 	}
 	
 	@Override
 	public void credit(String accountNumber, double amount) throws AccountNotFoundException {
 		super.credit(accountNumber, amount);
 		sendEmail(accountNumber);
-		negBalanceMesg();
 	}
 
 }

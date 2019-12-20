@@ -1,39 +1,22 @@
+
 package creditcard.ui;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
-import banking.factory.BankFactory;
 import creditcard.factory.CcardFactory;
 import creditcard.factory.CcardServiceFactory;
-import creditcard.account.Bronze;
 import creditcard.account.CcardAccount;
-import creditcard.account.Gold;
-import creditcard.account.Silver;
 import creditcard.controller.CcardController;
 import creditcard.customer.CustomerCcard;
-import creditcard.dataacess.CardDataAccess;
-import framework.account.AccountDefault;
-import framework.controller.Controller;
-import framework.customer.CustomerDefault;
-import framework.exceptions.AccountNotFoundException;
-import framework.exceptions.BalanceInsufficientException;
-import framework.ui.CreditDialog;
-import framework.ui.CustomerDialogBox;
-import framework.ui.DebitDialog;
 import framework.ui.GUI;
 
 public class CcardGUI extends GUI {
@@ -242,7 +225,6 @@ public class CcardGUI extends GUI {
 				
 			}
 			
-			try {
 				CustomerCcard customer = new CustomerCcard(clientName, street, city, state, email, nZip);
 				if (accountType == "Gold") {
 					CcardAccount account = cardFactory.createGoldAccount(ccnumber);
@@ -256,10 +238,8 @@ public class CcardGUI extends GUI {
 						customer.addAccount(account);
 					}
 				}
-				controller.addCustomer(customer);
-			} catch(Exception e) {
-				JOptionPane.showMessageDialog(this, "Sorry,An error occured");
-			}
+				controller.addCardCustomer(customer);
+			
 			
 			
 		}
@@ -285,11 +265,15 @@ public class CcardGUI extends GUI {
 			dep.show();
 
 			if (amountDeposit != null && !amountDeposit.isEmpty()) {
-				String response = controller.credit(Double.parseDouble(amountDeposit), ccnumber);
-				if (response.equals("Account Not Found"))
-					JOptionPane.showMessageDialog(this, response);
-				else
-					JOptionPane.showMessageDialog(this, "Money Depositted");
+				try {
+					String response = controller.credit(Double.parseDouble(amountDeposit), ccnumber);
+					if (response.equals("Account Not Found"))
+						JOptionPane.showMessageDialog(this, response);
+					else
+						JOptionPane.showMessageDialog(this, "Money Depositted");
+				} catch(NumberFormatException e) {
+					JOptionPane.showMessageDialog(this, "Invalid Amount");
+				}
 
 			}
 			loadAccountTable();
@@ -310,15 +294,20 @@ public class CcardGUI extends GUI {
 
 			if (amountDeposit != null && !amountDeposit.isEmpty()) {
 				// compute new amount
-				double deposit = Double.parseDouble(amountDeposit);
-
-				String response = controller.debit(deposit, name);
-				if (response.equals("Insufficient Balance"))
-					JOptionPane.showMessageDialog(this, "Insufficient Balance");
-				else if (response.equals("Account Not Found")) {
-					JOptionPane.showMessageDialog(this, "Account Not Found");
-				} else {
-					JOptionPane.showMessageDialog(this, "Account Debitted!");
+				try {
+					double deposit = Double.parseDouble(amountDeposit);
+					
+					String response = controller.debit(deposit, ccnumber);
+					
+					if (response.equals("Insufficient Balance"))
+						JOptionPane.showMessageDialog(this, "Insufficient Balance");
+					else if (response.equals("Account Not Found")) {
+						JOptionPane.showMessageDialog(this, "Account Not Found");
+					} else {
+						JOptionPane.showMessageDialog(this, "Account Debitted!");
+					}
+				} catch(NumberFormatException e) {
+					JOptionPane.showMessageDialog(this, "Invalid Amount");
 				}
 
 			}

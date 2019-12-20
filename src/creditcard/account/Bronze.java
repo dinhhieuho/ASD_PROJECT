@@ -1,3 +1,4 @@
+
 package creditcard.account;
 
 import java.time.LocalDate;
@@ -24,10 +25,7 @@ public class Bronze  extends CcardAccount {
 		return 0;
 	}
 	
-	@Override
-	public String toString() {
-		return "CC_number"+super.getCC_number()+"exp_date:";
-	}
+	
 	@Override
 	public String getAccountType() {
 		return accountType;
@@ -35,3 +33,5 @@ public class Bronze  extends CcardAccount {
 	
 	
 }
+
+

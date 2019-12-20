@@ -7,8 +7,10 @@ import framework.customer.Customer;
 import framework.customer.CustomerDefault;
 import framework.customer.OrganizationDefault;
 import framework.entry.Entry;
+import framework.exceptions.AccountNotFoundException;
+import framework.exceptions.BalanceInsufficientException;
 
-public class Company extends OrganizationDefault {
+public class Company extends CustomerDefault {
 
 	private int nr_of_employees;
 	private String ctype = "Company";
@@ -34,8 +36,28 @@ public class Company extends OrganizationDefault {
 			super.sendEmail(message);
 
 		} catch (EmptyStackException e) {
-
+			
 		}
+	}
+	
+	@Override
+	public void debit(String accountNumber, double amount)
+			throws AccountNotFoundException, BalanceInsufficientException {
+		try {
+			super.debit(accountNumber, amount);
+		}
+		catch(AccountNotFoundException | BalanceInsufficientException e) {
+			negBalanceMesg();
+			 throw new BalanceInsufficientException("Insufficient Balance");
+		}
+		sendEmail(accountNumber);
+
+	}
+	
+	@Override
+	public void credit(String accountNumber, double amount) throws AccountNotFoundException {
+		super.credit(accountNumber, amount);
+		sendEmail(accountNumber);
 	}
 
 }

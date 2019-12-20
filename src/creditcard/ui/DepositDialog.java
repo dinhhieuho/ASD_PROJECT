@@ -1,3 +1,4 @@
+
 package creditcard.ui;
 
 import java.awt.*;
@@ -92,5 +93,4 @@ public class DepositDialog extends javax.swing.JDialog
 	{
 		dispose();
 	}
-
 }

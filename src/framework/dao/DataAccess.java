@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import framework.customer.Customer;
 import framework.customer.CustomerDefault;
+import framework.observable.Observable;
+import framework.ui.TableView;
 
 
 /**
@@ -44,4 +46,6 @@ public interface DataAccess {
 	 * @return
 	 */
 	public Optional<CustomerDefault> findAccountByAccountNumber(String accountNumber);
+	
+	public void setSubject(Observable<TableView> subject);
 }

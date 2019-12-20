@@ -7,6 +7,8 @@ import framework.account.AccountDefault;
 import framework.entry.EntryDefault;
 import framework.exceptions.AccountNotFoundException;
 import framework.exceptions.BalanceInsufficientException;
+import framework.observable.Observable;
+import framework.ui.TableView;
 
 public class CustomerDefault implements Customer {
 
@@ -14,8 +16,9 @@ public class CustomerDefault implements Customer {
 	private String street;
 	private String city;
 	private String state;
-	private String email;
+	private String email, alert;
 	private int zip;
+	private Observable<TableView> subject;
 	private HashMap<String, AccountDefault> accounts = new HashMap<String, AccountDefault>();
 
 	public CustomerDefault(String name, String street, String city, String state, String email, int zip) {
@@ -40,6 +43,8 @@ public class CustomerDefault implements Customer {
 
 	@Override
 	public void sendEmail(String message) {
+		alert = message;
+		this.subject.setState(message);
 		System.out.println("Email Address: " + email + "\nEmail Message: " + message);
 
 	}
@@ -57,6 +62,9 @@ public class CustomerDefault implements Customer {
 			double balanceLeft = account.getBalance() - amount;
 			account.setBalance(balanceLeft);
 			account.addEntry(new EntryDefault(amount, "debited"));
+			if(subject != null) {
+				subject.setState();
+			}
 		}
 
 	}
@@ -72,6 +80,9 @@ public class CustomerDefault implements Customer {
 			throw new AccountNotFoundException("Account Not Found");
 		}
 
+		if(subject != null) {
+			subject.setState();
+		}
 	}
 
 	public String getEmail() {
@@ -106,14 +117,24 @@ public class CustomerDefault implements Customer {
 	}
 
 	public String negBalanceMesg() {
-		return "Dear " + name + ", your transaction has failed because you don't have enough balance";
+		return null;
 	}
 
-	public void printCustomerReport() {	
+	public String printCustomerReport() {
+		String message = "";
 		for(Entry<String, AccountDefault> entry : accounts.entrySet()) {
 			AccountDefault account = entry.getValue();
-			System.out.println(name + " | " + account.getAccountNumber() + " | " + account.getBalance()+" | "+account.getAccountType());
+			message = name + " | " + account.getAccountNumber() + " | " + account.getBalance()+" | "+account.getAccountType();
 		}
+		//subject.setState(message);
+		return message;
 	}
-
+	
+	public void setSubject(Observable<TableView> subject) {
+		this.subject = subject;
+	}
+	
+	public Observable<TableView> getSubject() {
+		return  subject;
+	}
 }

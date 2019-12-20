@@ -87,12 +87,6 @@ public class JDialog_Deposit extends javax.swing.JDialog {
 		String accnr = JTextField_ACCNR.getText();
 		System.out.println(accnr);
 		if (!amountDeposit.isEmpty()) {
-
-			HashMap<String, String> arg = new HashMap<String, String>();
-
-			arg.put("accNumber", accnr);
-			arg.put("amount", amountDeposit);
-
 			try {
 				controller.credit(Double.parseDouble(amountDeposit), accnr);
 			} catch (NumberFormatException e) {
