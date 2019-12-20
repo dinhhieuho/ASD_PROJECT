@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 
 import framework.controller.Controller;
 import framework.factory.CustomerFactory;
+import framework.observable.JtableViewObservable;
+import framework.observable.Observable;
 
 public class DefaultGUI extends GUI {
 
@@ -45,10 +47,18 @@ public class DefaultGUI extends GUI {
 
 		// factory for creating new customers
 		protected CustomerFactory customerFactory;
+		
+		private JtableViewObservable<TableView> subject;
 
 		public DefaultGUI(Controller controller) {
 			this.controller = controller;
 			customerFactory = new CustomerFactory(); // default factory
+		}
+		
+		public DefaultGUI(Controller controller, JtableViewObservable<TableView> subject) {
+			this.controller = controller;
+			customerFactory = new CustomerFactory(); // default factory
+			this.subject = subject;
 		}
 
 		{
@@ -62,7 +72,7 @@ public class DefaultGUI extends GUI {
 		// set actionlisteners for default buttons
 		{
 			JButton_Customer.addActionListener(e -> {
-				CustomerDialogBox pac = new CustomerDialogBox(customerFactory, controller);
+				CustomerDialogBox pac = new CustomerDialogBox(customerFactory, controller, subject);
 				pac.setBounds(450, 20, 300, 330);
 				pac.show();
 			});
@@ -109,14 +119,18 @@ public class DefaultGUI extends GUI {
 			setTitle(title);
 			setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
 			getContentPane().setLayout(new BorderLayout(0, 0));
-			setSize(575, 310);
+			setSize(975, 410);
 			setVisible(false);
 			JPanel1.setLayout(null);
 			getContentPane().add(BorderLayout.CENTER, JPanel1);
-			JPanel1.setBounds(0, 0, 575, 310);
+			JPanel1.setBounds(0, 0, 975, 310);
 
 			JScrollPane1 = new JScrollPane();
-			customerList = new TableView(defaultColumns);
+			if(subject != null) {
+				customerList = new TableView(defaultColumns, subject);
+			}
+			else
+				customerList = new TableView(defaultColumns);
 			JPanel1.add(JScrollPane1);
 			JScrollPane1.setBounds(12, 92, 444, 160);
 			JScrollPane1.getViewport().add(customerList);
@@ -211,5 +225,26 @@ public class DefaultGUI extends GUI {
 				accnr = (String) model.getValueAt(selection, 0);
 			}
 			return accnr;
+		}
+		
+		public void resetDefaultButtons() {
+			topButtons.clear();
+			rightButtons.clear();
+		}
+		
+		public Controller getController() {
+			return this.controller;
+		}
+		
+		public DefaultTableModel getDefautModel() {
+			return customerList.getTvModel();
+		}
+		
+		public CustomerFactory getFactory() {
+			return this.customerFactory;
+		}
+		
+		public JtableViewObservable<TableView> getSubject(){
+			return this.subject;
 		}
 }

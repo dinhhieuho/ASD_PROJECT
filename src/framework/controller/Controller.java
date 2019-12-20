@@ -59,9 +59,16 @@ public class Controller {
 	}
 
 	public void generateReport() {
+		String message = "Account Report\nname|Account Number|Balance|AccountType";
 		List<CustomerDefault> customer = dataAccess.findAll();
-		System.out.println("Account Report\nname|Account Number|Balance");
-		customer.forEach(CustomerDefault::printCustomerReport);
+		//System.out.println();
+		//customer.forEach(CustomerDefault::printCustomerReport);
+		for(CustomerDefault c : customer) {
+			message += "\n"+c.printCustomerReport();
+		}
+		if(!customer.isEmpty()) {
+			customer.get(0).getSubject().setState(message);
+		}
 	}
 
 	

@@ -4,13 +4,19 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 import banking.factory.BankFactory;
+import banking.factory.CompanyFactory;
+import banking.factory.PersonFactory;
+import framework.Finco;
 import framework.controller.Controller;
+import framework.factory.CustomerFactory;
 import framework.ui.DefaultGUI;
+import framework.ui.GUI;
 
-public class BankGUI extends DefaultGUI {
+public class BankGUI extends GUI {
 
 	DefaultTableModel model;
-
+	DefaultGUI gui = new Finco().getView();
+	
 	// bank buttons
 	JButton addPersonal = new JButton("Add Personal Account");
 	JButton addCompany = new JButton("Add Company Account");
@@ -20,64 +26,61 @@ public class BankGUI extends DefaultGUI {
 	JButton report = new JButton("Report");
 	
 	// controller for business logic
-	private Controller controller;
-	
-	private BankFactory bankFactory;
+	private banking.controller.Controller controller;
 	
 	
-	public BankGUI(Controller controller) {
-		super(controller);
-		setTitle("Bank Application");
+	public BankGUI() {
+		controller = new banking.controller.Controller(new Finco().getDefaultDBAccess());
+		//
+		gui.setFincoViewTitle("Bank Application");
+		//setTitle("Bank Application");
+		
+		//reset buttons
+		gui.resetDefaultButtons();
 
 		// set button bounds
 		addPersonal.setBounds(240, 20, 192, 33);
 		addInterest.setBounds(448, 20, 106, 33);
 		
+		gui.addTopButton(addPersonal);
+		gui.addTopButton(addCompany);
+		gui.addTopButton(addInterest);
+		gui.addTopButton(report);
 
-		addTopButton(addPersonal);
-		addTopButton(addCompany);
-		addTopButton(addInterest);
-		addTopButton(report);
-
-		addRightButton(deposit);
-		addRightButton(withdraw);
+		gui.addRightButton(deposit);
+		gui.addRightButton(withdraw);
 		
-		buildGUI();
+		//buildGUI();
 
 		// add actionListeners
 		addInterest.addActionListener(e -> {
-		//	actionHandler(e);
-			refreshTable();
+			controller.addInterest();
 		});
 		addCompany.addActionListener(e -> {
-			JDialog_AddCompAcc pac = new JDialog_AddCompAcc(this,bankFactory,controller);
+			JDialog_AddCompAcc pac = new JDialog_AddCompAcc(new CompanyFactory(), controller, gui.getSubject());
 				pac.setBounds(450, 20, 300, 330);
 				pac.show();
-				
-				refreshTable();
 		});
 		
 		addPersonal.addActionListener(e -> {
-			JDialog_AddPAcc pac = new JDialog_AddPAcc(this,controller);
+			JDialog_AddPAcc pac = new JDialog_AddPAcc(new PersonFactory(),controller, gui.getSubject());
 				pac.setBounds(450, 20, 300, 330);
 				pac.show();
 				//
-				refreshTable();
 		});
 		
 		deposit.addActionListener(e -> {
-			String accnr = retRieveAccNr(model);
+			String accnr = gui.retRieveAccNr(gui.getDefautModel());
 			if(accnr != null) {
 			JDialog_Deposit pac = new JDialog_Deposit(this,accnr,controller);
 				pac.setBounds(450, 20, 300, 330);
 				pac.show();
 				//
-				refreshTable();
 			}
 		});
 		
 		withdraw.addActionListener(e -> {
-			String accnr = retRieveAccNr(model);
+			String accnr = gui.retRieveAccNr(gui.getDefautModel());
 			if(accnr != null) {
 			JDialog_Withdraw pac = new JDialog_Withdraw(this,accnr,controller);
 				pac.setBounds(450, 20, 300, 330);
@@ -88,43 +91,45 @@ public class BankGUI extends DefaultGUI {
 		});
 		
 		report.addActionListener(e->{
-			controller.generateReport();
+			gui.getController().generateReport();
 		});
-		
-		
-		// register buttons
-//		registerBtn(addInterest, "bankinterest", new InterestController());
-//		registerBtn(addCompany, "companyaccount", new CompanyAccController());
-//		registerBtn(addPersonal, "personaccount", new PersonAccController());
-//		registerBtn(deposit, "deposit", new CreditController());
-//		registerBtn(withdraw, "debit", new DebitController());
 
 	}
 
-	public void refreshTable() {
-		Object[] rowdata = new Object[8];
-		
-		model = new DefaultTableModel();
-		model.addColumn("AccountNr");
-		model.addColumn("Name");
-		model.addColumn("City");
-		model.addColumn("P/C");
-		model.addColumn("Ch/S");
-		model.addColumn("Amount");
-//		for (Customer customer : fincoDao.findAll()) {
-//			Account account = customer.getAccounts().entrySet().iterator().next().getValue();
-//
-//			rowdata[0] = account.getAccountNumber();
-//			rowdata[1] = customer.getName();
-//			rowdata[2] = customer.getCity();
-//			rowdata[3] = customer.getCustomerType(); // ctype
-//			rowdata[4] = account.getAccountType(); // atype
-//			rowdata[5] = account.getBalance() + "";
-//			model.addRow(rowdata);
-//		}
 
-		// update table
-		updateTableModel(model);
+	@Override
+	public void run() {
+		gui.run();
+		
 	}
+
+
+	@Override
+	public void setTableModel(DefaultTableModel model) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void updateTableModel(DefaultTableModel model) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void addTopButton(JButton button) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void addRightButton(JButton button) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

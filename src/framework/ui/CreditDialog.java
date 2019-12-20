@@ -63,6 +63,7 @@ public class CreditDialog extends JDialog{
 		JButton_Cancel.setBounds(156, 84, 84, 24);
 		getContentPane().add(JTextField_Crebit);
 		JTextField_Crebit.setBounds(84, 48, 144, 24);
+		JTextField_NAME.setText(accnr);
 
 		SymAction lSymAction = new SymAction();
 		JButton_OK.addActionListener(lSymAction);

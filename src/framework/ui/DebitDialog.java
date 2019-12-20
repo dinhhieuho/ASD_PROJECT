@@ -44,6 +44,7 @@ public class DebitDialog extends JDialog {
 		// JTextField_NAME.setEditable(false);
 		getContentPane().add(JTextField_NAME);
 		JTextField_NAME.setBounds(84, 12, 144, 24);
+		JTextField_NAME.setText(accnr);
 		JButton_OK.setText("OK");
 		JButton_OK.setActionCommand("OK");
 		getContentPane().add(JButton_OK);

@@ -6,14 +6,17 @@ import javax.swing.JOptionPane;
 import framework.controller.Controller;
 import framework.customer.CustomerDefault;
 import framework.factory.CustomerFactory;
+import framework.observable.JtableViewObservable;
 
 public class CustomerDialogBox extends JDialog {
 	private CustomerFactory customerFactory;
 	private Controller controller;
+	private JtableViewObservable<TableView> subject;
 
-	public CustomerDialogBox(CustomerFactory customerFactory, Controller controller) {
+	public CustomerDialogBox(CustomerFactory customerFactory, Controller controller, JtableViewObservable<TableView> subject) {
 		this.customerFactory = customerFactory;
 		this.controller = controller;
+		this.subject = subject;
 
 		setTitle("Add Account");
 		setModal(true);
@@ -155,6 +158,7 @@ public class CustomerDialogBox extends JDialog {
 		{
 			try {
 				CustomerDefault customer = customerFactory.createCustomer(name, street, city, state, Integer.parseInt(zip), email, accountNumber);
+				customer.setSubject(subject);
 				controller.addCustomer(customer);
 				JOptionPane.showMessageDialog(this, "Account created successfully!");
 				dispose();
